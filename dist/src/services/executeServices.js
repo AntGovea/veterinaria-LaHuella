@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Excecute = void 0;
+const config_1 = require("../config");
 const Connection_1 = require("../db/Connection");
 4; //!Metodo para reduccion de codigo de peticiones
 class Excecute {
@@ -14,7 +15,13 @@ class Excecute {
                 return new Promise((resolve, reject) => {
                     Connection_1.pool.getConnection(function (e, connection) {
                         if (e) {
-                            console.log('Error al abrir conexion con la bd');
+                            console.log("Error al abrir conexion con la bd");
+                            console.log("datos de conexion");
+                            console.log(`host${config_1.DB_HOST}`);
+                            console.log(`user${config_1.DB_USER}`);
+                            console.log(`port${config_1.DB_PORT}`);
+                            console.log(`password${config_1.DB_PASSWORD}`);
+                            console.log(`database${config_1.DB_NAME}`);
                             console.log(e);
                             return resolve({
                                 validacion: false,

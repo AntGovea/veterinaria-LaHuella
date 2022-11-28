@@ -1,3 +1,4 @@
+import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from "../config";
 import { pool } from "../db/Connection";
 
 4; //!Metodo para reduccion de codigo de peticiones
@@ -13,8 +14,14 @@ export class Excecute {
       return new Promise((resolve, reject) => {
         pool.getConnection(function (e: any, connection: any) {
           if (e) {
-            console.log('Error al abrir conexion con la bd')
-            console.log(e)
+            console.log("Error al abrir conexion con la bd");
+            console.log("datos de conexion");
+            console.log(`host${DB_HOST}`);
+            console.log(`user${DB_USER}`);
+            console.log(`port${DB_PORT}`);
+            console.log(`password${DB_PASSWORD}`);
+            console.log(`database${DB_NAME}`);
+            console.log(e);
             return resolve({
               validacion: false,
               descripcion: `Error al abrir conexion `,
@@ -37,8 +44,8 @@ export class Excecute {
                     descripcion: error.message,
                   });
                 } else {
-                  console.log(sentencial_sql)
-                  console.log(results)
+                  console.log(sentencial_sql);
+                  console.log(results);
                   return resolve({
                     validacion: true,
                     descripcion: "consulta exitosa",
