@@ -14,7 +14,7 @@ class Excecute {
                 return new Promise((resolve, reject) => {
                     Connection_1.pool.getConnection(function (e, connection) {
                         if (e) {
-                            return resolve({
+                            return reject({
                                 descripcion: `Error al abrir conexion `,
                                 validacion: false,
                                 data: 500,

@@ -11,11 +11,19 @@ export class ControllerRol {
       console.log('aqui andamos, por que aqui fue donde nos puso la vida XD')
       let querySQL = `SELECT * FROM ROL;`;
       let respuesta: any = await execute.query(querySQL);
-      res.status(200).send({
-        code: HttpCodes.aceptacion,
-        description: descriptions.aceptacion,
-        data: respuesta.data,
-      });
+      if (respuesta.validacion) {
+        res.send({
+          code: HttpCodes.aceptacion,
+          description: descriptions.aceptacion,
+          data: respuesta.data,
+        });
+      }else{
+        res.send({
+          code: HttpCodes.error,
+          description: respuesta.descripcion,
+        });
+
+      }
     } catch (e: any) {
       res.status(500).json({
         code: HttpCodes.error,

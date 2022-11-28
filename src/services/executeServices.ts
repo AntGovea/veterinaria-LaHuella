@@ -13,7 +13,7 @@ export class Excecute {
       return new Promise((resolve, reject) => {
         pool.getConnection(function (e: any, connection: any) {
           if (e) {
-            return resolve({
+            return reject({
               descripcion: `Error al abrir conexion `,
               validacion: false,
               data: 500,
