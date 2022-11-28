@@ -10,7 +10,7 @@ let execute = new Excecute();
     try {
       let querySQL = `SELECT * FROM USUARIO;`;
       let respuesta: any = await execute.query(querySQL);
-      if (respuesta.validacion===200) {
+      if (respuesta.validacion) {
         res.send({
           code: HttpCodes.aceptacion,
           description: descriptions.aceptacion,
