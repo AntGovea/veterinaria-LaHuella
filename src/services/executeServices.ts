@@ -17,7 +17,7 @@ export class Excecute {
             return reject({
               validacion: false,
               descripcion: `Error al abrir conexion `,
-              data: 500,
+              data: null,
             });
           } else {
             connection.query(
@@ -31,7 +31,7 @@ export class Excecute {
                     `*******************************${sentencial_sql}****************************`
                   );
                   console.log(error.message);
-                  return resolve({
+                  return reject({
                     validacion: false,
                     descripcion: error.message,
                   });

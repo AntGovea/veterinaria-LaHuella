@@ -28,6 +28,7 @@ class ControllerRol {
                     });
                 }
                 else {
+                    console.log('else de respuesta .validacion');
                     res.send({
                         code: Types_1.HttpCodes.error,
                         description: respuesta.descripcion,
@@ -35,9 +36,9 @@ class ControllerRol {
                 }
             }
             catch (e) {
-                res.status(500).json({
+                res.json({
                     code: Types_1.HttpCodes.error,
-                    description: e.message,
+                    description: e,
                     data: null,
                 });
             }

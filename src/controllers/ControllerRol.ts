@@ -11,6 +11,7 @@ export class ControllerRol {
       console.log('aqui andamos, por que aqui fue donde nos puso la vida XD')
       let querySQL = `SELECT * FROM ROL;`;
       let respuesta: any = await execute.query(querySQL);
+
       if (respuesta.validacion) {
         res.send({
           code: HttpCodes.aceptacion,
@@ -18,6 +19,7 @@ export class ControllerRol {
           data: respuesta.data,
         });
       }else{
+        console.log('else de respuesta .validacion')
         res.send({
           code: HttpCodes.error,
           description: respuesta.descripcion,
@@ -25,9 +27,9 @@ export class ControllerRol {
 
       }
     } catch (e: any) {
-      res.status(500).json({
+      res.json({
         code: HttpCodes.error,
-        description: e.message,
+        description: e,
         data: null,
       });
     }
