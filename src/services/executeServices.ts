@@ -13,11 +13,11 @@ export class Excecute {
       return new Promise((resolve, reject) => {
         pool.getConnection(function (e: any, connection: any) {
           if (e) {
-            return {
-              msg: `Error al abrir conexion `,
-              error: e.msessage,
+            return resolve({
+              descripcion: `Error al abrir conexion `,
+              validacion: false,
               data: 500,
-            };
+            });
           } else {
             connection.query(
               sentencial_sql,
@@ -35,6 +35,8 @@ export class Excecute {
                     descripcion: error.message,
                   });
                 } else {
+                  console.log(sentencial_sql)
+                  console.log(results)
                   return resolve({
                     validacion: true,
                     descripcion: "consulta exitosa",

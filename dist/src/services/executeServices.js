@@ -14,11 +14,11 @@ class Excecute {
                 return new Promise((resolve, reject) => {
                     Connection_1.pool.getConnection(function (e, connection) {
                         if (e) {
-                            return {
-                                msg: `Error al abrir conexion `,
-                                error: e.msessage,
+                            return resolve({
+                                descripcion: `Error al abrir conexion `,
+                                validacion: false,
                                 data: 500,
-                            };
+                            });
                         }
                         else {
                             connection.query(sentencial_sql, function (error, results, fields) {
@@ -34,6 +34,8 @@ class Excecute {
                                     });
                                 }
                                 else {
+                                    console.log(sentencial_sql);
+                                    console.log(results);
                                     return resolve({
                                         validacion: true,
                                         descripcion: "consulta exitosa",
