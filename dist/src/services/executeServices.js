@@ -14,8 +14,9 @@ class Excecute {
                 return new Promise((resolve, reject) => {
                     Connection_1.pool.getConnection(function (e, connection) {
                         if (e) {
-                            console.log('Error al abrir conexion');
-                            return reject({
+                            console.log('Error al abrir conexion con la bd');
+                            console.log(e);
+                            return resolve({
                                 validacion: false,
                                 descripcion: `Error al abrir conexion `,
                                 data: null,
