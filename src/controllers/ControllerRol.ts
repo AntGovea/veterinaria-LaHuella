@@ -35,7 +35,7 @@ getRols = async (req: Request, res: Response) => {
   addRol = async (req: Request, res: Response) => {
     try {
       let {rol}=req.body;
-      let querySQL = `INSERT INTO rol (rol) VALUES (${rol});`;
+      let querySQL = `INSERT INTO rol (rol) VALUES ('${rol}');`;
       let respuesta: any = await execute.query(querySQL);
 
       if (respuesta.validacion) {

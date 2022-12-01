@@ -44,7 +44,7 @@ class ControllerRol {
         this.addRol = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let { rol } = req.body;
-                let querySQL = `INSERT INTO rol (rol) VALUES (${rol});`;
+                let querySQL = `INSERT INTO rol (rol) VALUES ('${rol}');`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
                     res.send({
