@@ -1,5 +1,5 @@
 import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from "../config";
-var mysql = require("mysql");
+var mysql = require('mysql2');
 
 
 export const pool = mysql.createPool({

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.pool = void 0;
 const config_1 = require("../config");
-var mysql = require("mysql");
+var mysql = require('mysql2');
 exports.pool = mysql.createPool({
     connectionLimit: 10,
     host: config_1.DB_HOST,
