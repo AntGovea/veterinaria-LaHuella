@@ -18,7 +18,7 @@ class ControllerRol {
         this.getRols = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 console.log('aqui andamos, por que aqui fue donde nos puso la vida XD');
-                let querySQL = `SELECT * FROM ROL;`;
+                let querySQL = `SELECT * FROM rol;`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
                     res.send({

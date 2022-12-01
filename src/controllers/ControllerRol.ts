@@ -9,7 +9,7 @@ export class ControllerRol {
   getRols = async (req: Request, res: Response) => {
     try {
       console.log('aqui andamos, por que aqui fue donde nos puso la vida XD')
-      let querySQL = `SELECT * FROM ROL;`;
+      let querySQL = `SELECT * FROM rol;`;
       let respuesta: any = await execute.query(querySQL);
 
       if (respuesta.validacion) {
