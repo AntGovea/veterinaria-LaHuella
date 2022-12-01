@@ -17,7 +17,6 @@ class ControllerRol {
     constructor() {
         this.getRols = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log('aqui andamos, por que aqui fue donde nos puso la vida XD');
                 let querySQL = `SELECT * FROM rol;`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
@@ -28,7 +27,6 @@ class ControllerRol {
                     });
                 }
                 else {
-                    console.log('else de respuesta .validacion');
                     res.send({
                         code: Types_1.HttpCodes.error,
                         description: respuesta.descripcion,
@@ -37,6 +35,33 @@ class ControllerRol {
             }
             catch (e) {
                 res.json({
+                    code: Types_1.HttpCodes.error,
+                    description: e,
+                    data: null,
+                });
+            }
+        });
+        this.addRol = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { rol } = req.body;
+                let querySQL = `INSERT INTO rol (rol) VALUES (${rol});`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
                     code: Types_1.HttpCodes.error,
                     description: e,
                     data: null,

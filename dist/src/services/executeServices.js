@@ -3,12 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Excecute = void 0;
 const config_1 = require("../config");
 const Connection_1 = require("../db/Connection");
-4; //!Metodo para reduccion de codigo de peticiones
+//!Metodo para reduccion de codigo de peticiones
 class Excecute {
     constructor() {
-        // metodo encargado de ejecutar consultas sql que recibe como paramtro, este metodo se repite muchas veces en el codigo de backend - por lo que se creo este
-        //m,etodo general que solo si hay algun problema , imprime el rror , la sentencia y devuelve un objeto con la proopiedad validacion en tru
-        //si todo salio bien y false si la consulta o la conexion sale mal
         this.query = (sentencial_sql) => {
             try {
                 let er;
@@ -37,14 +34,12 @@ class Excecute {
                                     console.log("error al ejecuatr sentencia slq");
                                     console.log(`*******************************${sentencial_sql}****************************`);
                                     console.log(error.message);
-                                    return reject({
+                                    return resolve({
                                         validacion: false,
                                         descripcion: error.message,
                                     });
                                 }
                                 else {
-                                    console.log(sentencial_sql);
-                                    console.log(results);
                                     return resolve({
                                         validacion: true,
                                         descripcion: "consulta exitosa",
@@ -61,7 +56,12 @@ class Excecute {
                     };
                 });
             }
-            catch (e) { }
+            catch (e) {
+                return {
+                    validacion: false,
+                    descripcion: e.message,
+                };
+            }
         };
     }
 }

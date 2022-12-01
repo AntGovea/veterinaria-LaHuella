@@ -1,13 +1,10 @@
 import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from "../config";
 import { pool } from "../db/Connection";
 
-4; //!Metodo para reduccion de codigo de peticiones
+ //!Metodo para reduccion de codigo de peticiones
 export class Excecute {
   constructor() {}
 
-  // metodo encargado de ejecutar consultas sql que recibe como paramtro, este metodo se repite muchas veces en el codigo de backend - por lo que se creo este
-  //m,etodo general que solo si hay algun problema , imprime el rror , la sentencia y devuelve un objeto con la proopiedad validacion en tru
-  //si todo salio bien y false si la consulta o la conexion sale mal
   query = (sentencial_sql: string) => {
     try {
       let er: any;
@@ -39,13 +36,11 @@ export class Excecute {
                     `*******************************${sentencial_sql}****************************`
                   );
                   console.log(error.message);
-                  return reject({
+                  return resolve({
                     validacion: false,
                     descripcion: error.message,
                   });
                 } else {
-                  console.log(sentencial_sql);
-                  console.log(results);
                   return resolve({
                     validacion: true,
                     descripcion: "consulta exitosa",
@@ -62,6 +57,11 @@ export class Excecute {
           descripcion: error.message,
         };
       });
-    } catch (e: any) {}
+    } catch (e: any) {
+      return {
+        validacion: false,
+        descripcion: e.message,
+      };
+    }
   };
 }
