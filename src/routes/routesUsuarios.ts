@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { ControllerRol } from "../controllers/ControllerRol";
+import ControllerUsuario from "../controllers/ControllerUsuario";
 
-const controllerRol = new ControllerRol();
+const controllerUsuario = new ControllerUsuario();
 const router = Router();
 
 //*Roles
-router.get("/getAll", controllerRol.getRols);
+router.get("/getAll", controllerUsuario.getUsuarios);
 
 export default router;

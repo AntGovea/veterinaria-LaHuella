@@ -6,5 +6,6 @@ const controllerRol = new ControllerRol_1.ControllerRol();
 const router = (0, express_1.Router)();
 //*Roles
 router.get("/getAll", controllerRol.getRols);
+router.post("/addRol", controllerRol.addRol);
 exports.default = router;
 //# sourceMappingURL=routesRoles.js.map

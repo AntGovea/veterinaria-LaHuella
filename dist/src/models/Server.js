@@ -8,11 +8,13 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 const morgan_1 = __importDefault(require("morgan"));
 const routesRoles_1 = __importDefault(require("../routes/routesRoles"));
+const routesUsuarios_1 = __importDefault(require("../routes/routesUsuarios"));
 dotenv_1.default.config();
 class Server {
     constructor() {
         this.apiPaths = {
             roles: "roles",
+            usuarios: "usuarios",
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || "8000";
@@ -25,6 +27,7 @@ class Server {
         //   res.send('../public/index.js')
         // });
         this.app.use(`${process.env.BASEURL}/${this.apiPaths.roles}`, routesRoles_1.default);
+        this.app.use(`${process.env.BASEURL}/${this.apiPaths.usuarios}`, routesUsuarios_1.default);
     }
     middlewares() {
         //cors
