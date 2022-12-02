@@ -42,7 +42,7 @@ class ControllerUsuario {
         });
         this.addUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let { usuario, contrasenia, token = '', estatus } = req.body;
+                let { usuario, contrasenia, estatus } = req.body;
                 let querySQL = `INSERT INTO usuarioLogin VALUES(
         '${usuario}',
         '${contrasenia}',

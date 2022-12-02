@@ -31,7 +31,7 @@ class ControllerUsuario {
   };
   addUser = async (req: Request, res: Response) => {
     try {
-      let { usuario, contrasenia, token='', estatus } = req.body;
+      let { usuario, contrasenia, estatus } = req.body;
       let querySQL = `INSERT INTO usuarioLogin VALUES(
         '${usuario}',
         '${contrasenia}',
