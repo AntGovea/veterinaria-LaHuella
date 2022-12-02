@@ -7,7 +7,7 @@ let execute = new Excecute();
 class ControllerUsuario {
   getUsuarios = async (req: Request, res: Response) => {
     try {
-      let querySQL = `SELECT * FROM usuario;`;
+      let querySQL = `SELECT * FROM usuarioLogin;`;
       let respuesta: any = await execute.query(querySQL);
       if (respuesta.validacion) {
         res.send({
