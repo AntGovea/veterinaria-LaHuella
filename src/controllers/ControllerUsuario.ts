@@ -33,7 +33,7 @@ class ControllerUsuario {
     try {
       let { usuario, contrasenia, estatus=1 } = req.body;
       
-      let querySQL = `INSERT INTO usuarioLogin VALUES(
+      let querySQL = `INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
         '${contrasenia}',
         ${estatus}
