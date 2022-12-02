@@ -9,5 +9,6 @@ const controllerUsuario = new ControllerUsuario_1.default();
 const router = (0, express_1.Router)();
 //*Roles
 router.get("/getAll", controllerUsuario.getUsuarios);
+router.get("/addUser", controllerUsuario.addUser);
 exports.default = router;
 //# sourceMappingURL=routesUsuarios.js.map

@@ -4,11 +4,10 @@ import { Excecute } from "../services/executeServices";
 
 let execute = new Excecute();
 
- class ControllerUsuario {
-
- getUsuarios = async (req: Request, res: Response) => {
+class ControllerUsuario {
+  getUsuarios = async (req: Request, res: Response) => {
     try {
-      let querySQL = `SELECT * FROM USUARIO;`;
+      let querySQL = `SELECT * FROM usuario;`;
       let respuesta: any = await execute.query(querySQL);
       if (respuesta.validacion) {
         res.send({
@@ -16,14 +15,12 @@ let execute = new Excecute();
           description: descriptions.aceptacion,
           data: respuesta.data,
         });
-      }else{
+      } else {
         res.send({
           code: HttpCodes.error,
           description: respuesta.descripcion,
         });
-
       }
-      
     } catch (e: any) {
       res.send({
         code: HttpCodes.error,
@@ -32,8 +29,35 @@ let execute = new Excecute();
       });
     }
   };
-
-  
+  addUser = async (req: Request, res: Response) => {
+    try {
+      let { usuario, contrasenia, token='', estatus } = req.body;
+      let querySQL = `INSERT INTO usuarioLogin VALUES(
+        '${usuario}',
+        '${contrasenia}',
+        ${estatus},
+        );`;
+      let respuesta: any = await execute.query(querySQL);
+      if (respuesta.validacion) {
+        res.send({
+          code: HttpCodes.aceptacion,
+          description: descriptions.aceptacion,
+          data: respuesta.data,
+        });
+      } else {
+        res.send({
+          code: HttpCodes.error,
+          description: respuesta.descripcion,
+        });
+      }
+    } catch (e: any) {
+      res.send({
+        code: HttpCodes.error,
+        description: e.message,
+        data: null,
+      });
+    }
+  };
 }
 
 export default ControllerUsuario;
