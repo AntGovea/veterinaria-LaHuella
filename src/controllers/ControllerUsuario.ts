@@ -31,11 +31,12 @@ class ControllerUsuario {
   };
   addUser = async (req: Request, res: Response) => {
     try {
-      let { usuario, contrasenia, estatus } = req.body;
+      let { usuario, contrasenia, estatus=1 } = req.body;
+      
       let querySQL = `INSERT INTO usuarioLogin VALUES(
         '${usuario}',
         '${contrasenia}',
-        ${estatus},
+        ${estatus}
         );`;
       let respuesta: any = await execute.query(querySQL);
       if (respuesta.validacion) {

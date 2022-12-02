@@ -42,11 +42,11 @@ class ControllerUsuario {
         });
         this.addUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let { usuario, contrasenia, estatus } = req.body;
+                let { usuario, contrasenia, estatus = 1 } = req.body;
                 let querySQL = `INSERT INTO usuarioLogin VALUES(
         '${usuario}',
         '${contrasenia}',
-        ${estatus},
+        ${estatus}
         );`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
