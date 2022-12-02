@@ -16,7 +16,7 @@ class ControllerUsuario {
     constructor() {
         this.getUsuarios = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let querySQL = `SELECT * FROM usuario;`;
+                let querySQL = `SELECT * FROM usuarioLogin;`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
                     res.send({
