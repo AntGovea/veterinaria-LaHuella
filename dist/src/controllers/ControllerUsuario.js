@@ -14,6 +14,33 @@ const executeServices_1 = require("../services/executeServices");
 let execute = new executeServices_1.Excecute();
 class ControllerUsuario {
     constructor() {
+        this.getUsuarioById = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let { idUsuario } = req.body;
+            try {
+                let querySQL = `SELECT * FROM getEmpleados WHERE  idUsuario=${idUsuario};`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
         this.getUsuarios = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let querySQL = `SELECT * FROM usuarioLogin;`;
@@ -42,13 +69,49 @@ class ControllerUsuario {
         });
         this.addUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let { usuario, contrasenia, estatus = 1 } = req.body;
-                let querySQL = `INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
+                let respuesta;
+                let { 
+                //*Persona
+                nombre, apellidoPaterno, apellidoMaterno, calle, colonia, numero, codigo_postal, fechaNacimiento, genero, telefono, 
+                //*Usuario
+                usuario, contrasenia, estatus = 1, 
+                //ROl
+                idRol, } = req.body;
+                let querySQLPersona = `INSERT INTO persona( nombre ,
+        apellidoPaterno ,
+        apellidoMaterno ,
+        calle ,
+        colonia ,
+        numero,
+        codigo_postal ,
+        fechaNacimiento ,
+        genero ,
+        telefono ,) VALUES(
+         '${nombre}',
+         '${apellidoPaterno}',
+         '${apellidoMaterno}',
+         '${calle}',
+         '${colonia}',
+         '${numero}',
+         '${codigo_postal}',
+         '${fechaNacimiento}',
+         ${genero},
+         '${telefono}'
+         );`;
+                respuesta = yield execute.query(querySQLPersona);
+                if (!respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: respuesta.descripcion,
+                        data: respuesta.data,
+                    });
+                }
+                let querySQLUsuario = `INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
         '${contrasenia}',
         ${estatus}
         );`;
-                let respuesta = yield execute.query(querySQL);
+                respuesta = yield execute.query(querySQLUsuario);
                 if (respuesta.validacion) {
                     res.send({
                         code: Types_1.HttpCodes.aceptacion,

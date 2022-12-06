@@ -10,5 +10,6 @@ const router = (0, express_1.Router)();
 //*Roles
 router.get("/getAll", controllerUsuario.getUsuarios);
 router.post("/addUser", controllerUsuario.addUser);
+router.post("/getUserById", controllerUsuario.addUser);
 exports.default = router;
 //# sourceMappingURL=routesUsuarios.js.map

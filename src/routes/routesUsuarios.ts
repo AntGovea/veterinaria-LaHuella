@@ -7,5 +7,6 @@ const router = Router();
 //*Roles
 router.get("/getAll", controllerUsuario.getUsuarios);
 router.post("/addUser", controllerUsuario.addUser);
+router.post("/getUserById", controllerUsuario.addUser);
 
 export default router;

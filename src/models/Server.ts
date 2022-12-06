@@ -1,9 +1,10 @@
-import express, { Application, Request,Response } from "express";
+import express, { Application, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 import rolRoutes from "../routes/routesRoles";
 import usuarioRoutes from "../routes/routesUsuarios";
+import clientesRoutes from "../routes/routerClientes";
 import path from "path";
 
 dotenv.config();
@@ -15,6 +16,7 @@ class Server {
   private apiPaths = {
     roles: "roles",
     usuarios: "usuarios",
+    clientes: "clientes",
   };
 
   constructor() {
@@ -27,13 +29,19 @@ class Server {
   }
 
   routes() {
-    
     // this.app.use(`/`, (req:Request,res:Response)=>{
-      
+
     //   res.send('../public/index.js')
     // });
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.roles}`, rolRoutes);
-    this.app.use(`${process.env.BASEURL}/${this.apiPaths.usuarios}`, usuarioRoutes);
+    this.app.use(
+      `${process.env.BASEURL}/${this.apiPaths.usuarios}`,
+      usuarioRoutes
+    );
+    this.app.use(
+      `${process.env.BASEURL}/${this.apiPaths.usuarios}`,
+      clientesRoutes
+    );
   }
 
   middlewares() {
@@ -44,8 +52,7 @@ class Server {
     //morgan
     this.app.use(morgan("dev"));
     //carpeta publica
-    this.app.use( express.static('public'));
-
+    this.app.use(express.static("public"));
   }
 
   listen() {
