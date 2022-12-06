@@ -30,7 +30,7 @@ class Server {
         // });
         this.app.use(`${process.env.BASEURL}/${this.apiPaths.roles}`, routesRoles_1.default);
         this.app.use(`${process.env.BASEURL}/${this.apiPaths.usuarios}`, routesUsuarios_1.default);
-        this.app.use(`${process.env.BASEURL}/${this.apiPaths.usuarios}`, routerClientes_1.default);
+        this.app.use(`${process.env.BASEURL}/${this.apiPaths.clientes}`, routerClientes_1.default);
     }
     middlewares() {
         //cors

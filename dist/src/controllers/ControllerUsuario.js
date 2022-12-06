@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ControllerUsuario = void 0;
 const Types_1 = require("../helpers/Types");
 const executeServices_1 = require("../services/executeServices");
 let execute = new executeServices_1.Excecute();
@@ -136,5 +137,6 @@ class ControllerUsuario {
         });
     }
 }
+exports.ControllerUsuario = ControllerUsuario;
 exports.default = ControllerUsuario;
 //# sourceMappingURL=ControllerUsuario.js.map

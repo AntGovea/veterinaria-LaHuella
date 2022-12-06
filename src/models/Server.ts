@@ -34,14 +34,8 @@ class Server {
     //   res.send('../public/index.js')
     // });
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.roles}`, rolRoutes);
-    this.app.use(
-      `${process.env.BASEURL}/${this.apiPaths.usuarios}`,
-      usuarioRoutes
-    );
-    this.app.use(
-      `${process.env.BASEURL}/${this.apiPaths.usuarios}`,
-      clientesRoutes
-    );
+    this.app.use(`${process.env.BASEURL}/${this.apiPaths.usuarios}`,usuarioRoutes);
+    this.app.use(`${process.env.BASEURL}/${this.apiPaths.clientes}`, clientesRoutes);
   }
 
   middlewares() {

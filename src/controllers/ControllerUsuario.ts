@@ -4,7 +4,7 @@ import { Excecute } from "../services/executeServices";
 
 let execute = new Excecute();
 
-class ControllerUsuario {
+export class ControllerUsuario {
   getUsuarioById = async (req: Request, res: Response) => {
     let { idUsuario } = req.body;
     try {
