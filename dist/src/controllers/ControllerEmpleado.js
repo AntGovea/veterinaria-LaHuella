@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ControllerEmpleados = void 0;
-const Types_1 = require("../helpers/Types");
+exports.ControllerEmpleado = void 0;
 const executeServices_1 = require("../services/executeServices");
+const types_1 = require("../types/types");
 let execute = new executeServices_1.Excecute();
-class ControllerEmpleados {
+class ControllerEmpleado {
     constructor() {
         this.getEmpleados = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
@@ -21,21 +21,21 @@ class ControllerEmpleados {
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
                     res.send({
-                        code: Types_1.HttpCodes.aceptacion,
-                        description: Types_1.descriptions.aceptacion,
+                        code: types_1.HttpCodes.aceptacion,
+                        description: types_1.descriptions.aceptacion,
                         data: respuesta.data,
                     });
                 }
                 else {
                     res.send({
-                        code: Types_1.HttpCodes.error,
+                        code: types_1.HttpCodes.error,
                         description: respuesta.descripcion,
                     });
                 }
             }
             catch (e) {
                 res.send({
-                    code: Types_1.HttpCodes.error,
+                    code: types_1.HttpCodes.error,
                     description: e.message,
                     data: null,
                 });
@@ -43,5 +43,5 @@ class ControllerEmpleados {
         });
     }
 }
-exports.ControllerEmpleados = ControllerEmpleados;
+exports.ControllerEmpleado = ControllerEmpleado;
 //# sourceMappingURL=ControllerEmpleado.js.map

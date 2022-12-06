@@ -1,12 +1,10 @@
 import { Router } from "express";
-import { ControllerEmpleados } from "../controllers/ControllerEmpleados";
+import { ControllerEmpleado } from "../controllers/ControllerEmpleado";
 
 
-const controllerEmpleados = new ControllerEmpleados();
+const controllerEmpleado = new ControllerEmpleado();
 const router = Router();
-
 //*Roles
-router.get("/getAll", controllerEmpleados.getEmpleados);
-// router.post("/addRol", controllerClientes.addRol);
+router.get("/getAll", controllerEmpleado.getEmpleados);
 
 export default router;
