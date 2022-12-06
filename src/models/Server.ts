@@ -5,6 +5,7 @@ import morgan from "morgan";
 import rolRoutes from "../routes/routesRoles";
 import usuarioRoutes from "../routes/routesUsuarios";
 import clientesRoutes from "../routes/routerClientes";
+import empleadosRoutes from "../routes/routerEmpleados";
 import path from "path";
 
 dotenv.config();
@@ -17,6 +18,7 @@ class Server {
     roles: "roles",
     usuarios: "usuarios",
     clientes: "clientes",
+    empleados: "empleados",
   };
 
   constructor() {
@@ -36,6 +38,7 @@ class Server {
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.roles}`, rolRoutes);
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.usuarios}`,usuarioRoutes);
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.clientes}`, clientesRoutes);
+    this.app.use(`${process.env.BASEURL}/${this.apiPaths.empleados}`, empleadosRoutes);
   }
 
   middlewares() {
