@@ -9,7 +9,7 @@ export class ControllerClientes{
 
     getClientes = async (req: Request, res: Response) => {
         try {
-      let querySQL = `SELECT * FROM getEmpleados;`;
+      let querySQL = `SELECT * FROM getClientes;`;
       let respuesta: any = await execute.query(querySQL);
       if (respuesta.validacion) {
         res.send({

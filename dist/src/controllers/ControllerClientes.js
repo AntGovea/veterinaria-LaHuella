@@ -17,7 +17,7 @@ class ControllerClientes {
     constructor() {
         this.getClientes = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let querySQL = `SELECT * FROM getEmpleados;`;
+                let querySQL = `SELECT * FROM getClientes;`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
                     res.send({
