@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const ControllerClientes_1 = require("../controllers/ControllerClientes");
-const controllerClientes = new ControllerClientes_1.ControllerClientes();
+const ControllerCategorias_1 = require("../controllers/ControllerCategorias");
+const controllerCategorias = new ControllerCategorias_1.ControllerCategorias();
 const router = (0, express_1.Router)();
 //*Roles
-router.get("/getAll", controllerClientes.getClientes);
+router.get("/getAll", controllerCategorias.getCategorias);
 // router.post("/addRol", controllerClientes.addRol);
 exports.default = router;
 //# sourceMappingURL=routerCategorias.js.map
