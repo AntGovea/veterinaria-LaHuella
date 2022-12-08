@@ -6,7 +6,11 @@ import rolRoutes from "../routes/routesRoles";
 import usuarioRoutes from "../routes/routesUsuarios";
 import clientesRoutes from "../routes/routerClientes";
 import empleadosRoutes from "../routes/routerEmpleados";
+
+import categoriasRoutes from "../routes/routerCategorias";
+import pedidosRoutes from "../routes/routerPedidos";
 import serviciosRoutes from "../routes/routerServicios";
+
 import path from "path";
 
 dotenv.config();
@@ -20,7 +24,10 @@ class Server {
     usuarios: "usuarios",
     clientes: "clientes",
     empleados: "empleados",
+
+    categorias: "categorias",
     servicios: "servicios",
+    pedidos: "pedidos",
   };
 
   constructor() {
@@ -43,7 +50,11 @@ class Server {
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.usuarios}`,usuarioRoutes);
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.clientes}`, clientesRoutes);
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.empleados}`, empleadosRoutes);
+   
+   
+    this.app.use(`${process.env.BASEURL}/${this.apiPaths.categorias}`, categoriasRoutes);
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.servicios}`, serviciosRoutes);
+    this.app.use(`${process.env.BASEURL}/${this.apiPaths.pedidos}`, pedidosRoutes);
   }
 
   middlewares() {

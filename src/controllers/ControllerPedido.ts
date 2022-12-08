@@ -5,11 +5,11 @@ import { Excecute } from "../services/executeServices";
 
 let execute = new Excecute();
 
-export class ControllerServicios{
+export class ControllerPedidos{
 
-    getServicios = async (req: Request, res: Response) => {
+    getPedidos = async (req: Request, res: Response) => {
         try {
-      let querySQL = `SELECT * FROM vistaServicio;`;
+      let querySQL = `SELECT * FROM pedido;`;
       let respuesta: any = await execute.query(querySQL);
       if (respuesta.validacion) {
         res.send({
@@ -31,4 +31,5 @@ export class ControllerServicios{
       });
     }
   };
+
     }
