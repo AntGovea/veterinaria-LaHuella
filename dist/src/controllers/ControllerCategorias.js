@@ -41,6 +41,33 @@ class ControllerCategorias {
                 });
             }
         });
+        this.addCategoria = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { categoria } = req.body;
+                let querySQL = `INSERT INTO categoria (categoria) VALUES ('${categoria}');`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e,
+                    data: null,
+                });
+            }
+        });
     }
 }
 exports.ControllerCategorias = ControllerCategorias;
