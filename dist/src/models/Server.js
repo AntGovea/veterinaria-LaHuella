@@ -11,6 +11,7 @@ const routesRoles_1 = __importDefault(require("../routes/routesRoles"));
 const routesUsuarios_1 = __importDefault(require("../routes/routesUsuarios"));
 const routerClientes_1 = __importDefault(require("../routes/routerClientes"));
 const routerEmpleados_1 = __importDefault(require("../routes/routerEmpleados"));
+const routerServicios_1 = __importDefault(require("../routes/routerServicios"));
 dotenv_1.default.config();
 class Server {
     constructor() {
@@ -19,6 +20,7 @@ class Server {
             usuarios: "usuarios",
             clientes: "clientes",
             empleados: "empleados",
+            servicios: "servicios",
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || "8000";
@@ -34,6 +36,7 @@ class Server {
         this.app.use(`${process.env.BASEURL}/${this.apiPaths.usuarios}`, routesUsuarios_1.default);
         this.app.use(`${process.env.BASEURL}/${this.apiPaths.clientes}`, routerClientes_1.default);
         this.app.use(`${process.env.BASEURL}/${this.apiPaths.empleados}`, routerEmpleados_1.default);
+        this.app.use(`${process.env.BASEURL}/${this.apiPaths.servicios}`, routerServicios_1.default);
     }
     middlewares() {
         //cors
