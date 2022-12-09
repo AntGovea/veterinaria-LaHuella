@@ -7,6 +7,5 @@ const router = (0, express_1.Router)();
 //*Roles
 router.get("/getAll", controllerCategorias.getCategorias);
 router.post("/addCategoria", controllerCategorias.addCategoria);
-// router.post("/addRol", controllerClientes.addRol);
 exports.default = router;
 //# sourceMappingURL=routerCategorias.js.map
