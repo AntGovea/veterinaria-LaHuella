@@ -132,6 +132,99 @@ class ControllerEmpleado {
                 });
             }
         });
+        this.updateEmpleado = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield transaction.startTransaction();
+                let { 
+                //?cliente
+                idPersona, idUsuario, 
+                //?persona
+                nombre, apellidoPaterno, apellidoMaterno, calle, colonia, numero, codigo_postal, fechaNacimiento, genero, telefono, 
+                //?usuarioLogin
+                usuario, contrasenia, estatus, 
+                //?rol
+                idRol, } = req.body;
+                let querySQL = `UPDATE persona SET
+      nombre='${nombre}',
+      apellidoPaterno='${apellidoPaterno}',
+      apellidoMaterno='${apellidoMaterno}',
+      calle='${calle}',
+      colonia='${colonia}',
+      numero='${numero}',
+      codigo_postal=${codigo_postal},
+      fechaNacimiento='${fechaNacimiento}',
+      genero=${genero},
+      telefono='${telefono}'
+      WHERE idPersona=${idPersona};`;
+                let respuesta = yield execute.query(querySQL);
+                if (!respuesta.validacion) {
+                    yield transaction.rollBackTransaction();
+                    res.send({
+                        code: types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                    return;
+                }
+                querySQL = `UPDATE usuarioLogin SET 
+    usuario='${usuario}',
+    contrasenia='${contrasenia}',
+    estatus=${estatus}
+    WHERE idUsuario=${idUsuario};`;
+                respuesta = yield execute.query(querySQL);
+                if (!respuesta.validacion) {
+                    yield transaction.rollBackTransaction();
+                    res.send({
+                        code: types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                    return;
+                }
+                yield transaction.commit();
+                res.send({
+                    code: types_1.HttpCodes.aceptacion,
+                    description: types_1.descriptions.aceptacion,
+                    data: respuesta.data,
+                });
+            }
+            catch (e) {
+                res.send({
+                    code: types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
+        this.deleteEmpleado = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield transaction.startTransaction();
+                let { idUsuario, } = req.body;
+                let querySQL = `UPDATE usuarioLogin SET 
+    estatus=0
+    WHERE idUsuario=${idUsuario};`;
+                let respuesta = yield execute.query(querySQL);
+                if (!respuesta.validacion) {
+                    yield transaction.rollBackTransaction();
+                    res.send({
+                        code: types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                    return;
+                }
+                yield transaction.commit();
+                res.send({
+                    code: types_1.HttpCodes.aceptacion,
+                    description: types_1.descriptions.aceptacion,
+                    data: respuesta.data,
+                });
+            }
+            catch (e) {
+                res.send({
+                    code: types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
     }
 }
 exports.ControllerEmpleado = ControllerEmpleado;

@@ -141,5 +141,117 @@ export class ControllerEmpleado{
     });
   }
 };
+updateEmpleado = async (req: Request, res: Response) => {
+   
+  try {
+    await transaction.startTransaction();
+
+    let {
+      //?cliente
+      idPersona,
+      idUsuario,
+      //?persona
+      nombre,
+      apellidoPaterno,
+      apellidoMaterno,
+      calle,
+      colonia,
+      numero,
+      codigo_postal,
+      fechaNacimiento,
+      genero,
+      telefono,
+      //?usuarioLogin
+      usuario,
+      contrasenia,
+      estatus,
+      //?rol
+      idRol,
+    } = req.body;
+    let querySQL = `UPDATE persona SET
+      nombre='${nombre}',
+      apellidoPaterno='${apellidoPaterno}',
+      apellidoMaterno='${apellidoMaterno}',
+      calle='${calle}',
+      colonia='${colonia}',
+      numero='${numero}',
+      codigo_postal=${codigo_postal},
+      fechaNacimiento='${fechaNacimiento}',
+      genero=${genero},
+      telefono='${telefono}'
+      WHERE idPersona=${idPersona};`;
+
+    let respuesta: any = await execute.query(querySQL);
+    if (!respuesta.validacion) {
+      await transaction.rollBackTransaction();
+      res.send({
+        code: HttpCodes.error,
+        description: respuesta.descripcion,
+      });
+      return;
+    }
+
+    querySQL = `UPDATE usuarioLogin SET 
+    usuario='${usuario}',
+    contrasenia='${contrasenia}',
+    estatus=${estatus}
+    WHERE idUsuario=${idUsuario};`;
+    respuesta = await execute.query(querySQL);
+    if (!respuesta.validacion) {
+      await transaction.rollBackTransaction();
+      res.send({
+        code: HttpCodes.error,
+        description: respuesta.descripcion,
+      });
+      return;
+    }
+
+    await transaction.commit();
+    res.send({
+      code: HttpCodes.aceptacion,
+      description: descriptions.aceptacion,
+      data: respuesta.data,
+    });
+  } catch (e: any) {
+    res.send({
+      code: HttpCodes.error,
+      description: e.message,
+      data: null,
+    });
+  }
+};
+deleteEmpleado = async (req: Request, res: Response) => {
+  try {
+    await transaction.startTransaction();
+    let {
+      idUsuario,
+    } = req.body;
+    let querySQL = `UPDATE usuarioLogin SET 
+    estatus=0
+    WHERE idUsuario=${idUsuario};`;
+   let  respuesta:any = await execute.query(querySQL);
+    if (!respuesta.validacion) {
+      await transaction.rollBackTransaction();
+      res.send({
+        code: HttpCodes.error,
+        description: respuesta.descripcion,
+      });
+      return;
+    }
+
+    await transaction.commit();
+    res.send({
+      code: HttpCodes.aceptacion,
+      description: descriptions.aceptacion,
+      data: respuesta.data,
+    });
+  } catch (e: any) {
+    res.send({
+      code: HttpCodes.error,
+      description: e.message,
+      data: null,
+    });
+  }
+};
 
     }
