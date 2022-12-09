@@ -92,8 +92,8 @@ export class ControllerServicios {
   };
   deleteServicio = async (req: Request, res: Response) => {
     try {
-      let {estatus,idServicio} = req.body;
-      let querySQL = `UPDATE servicio SET estatus=${estatus} WHERE idServicio=${idServicio};`;
+      let {idServicio} = req.body;
+      let querySQL = `UPDATE servicio SET estatus=0 WHERE idServicio=${idServicio};`;
       let respuesta: any = await execute.query(querySQL);
       if (respuesta.validacion) {
         res.send({

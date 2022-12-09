@@ -108,8 +108,8 @@ class ControllerServicios {
         });
         this.deleteServicio = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let { estatus, idServicio } = req.body;
-                let querySQL = `UPDATE servicio SET estatus=${estatus} WHERE idServicio=${idServicio};`;
+                let { idServicio } = req.body;
+                let querySQL = `UPDATE servicio SET estatus=0 WHERE idServicio=${idServicio};`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
                     res.send({
