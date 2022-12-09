@@ -9,5 +9,6 @@ router.get("/getAll", controllerEmpleado.getEmpleados);
 router.post("/addEmpleado", controllerEmpleado.addEmpleado);
 router.post("/updateEmpleado", controllerEmpleado.updateEmpleado);
 router.post("/deleteEmpleado", controllerEmpleado.deleteEmpleado);
+router.post("/getEmpleadosByStatus", controllerEmpleado.getEmpleadosByStatus);
 exports.default = router;
 //# sourceMappingURL=routerEmpleados.js.map
