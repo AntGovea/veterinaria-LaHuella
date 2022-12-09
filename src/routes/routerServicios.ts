@@ -7,8 +7,8 @@ const router = Router();
 
 //*Roles
 router.get("/getAll", controllerServicios.getServicios);
-router.get("/addServicio", controllerServicios.addServicio);
-router.get("/updateServicio", controllerServicios.updateServicio);
-router.get("/deleteServicio", controllerServicios.deleteServicio);
+router.post("/addServicio", controllerServicios.addServicio);
+router.post("/updateServicio", controllerServicios.updateServicio);
+router.post("/deleteServicio", controllerServicios.deleteServicio);
 
 export default router;
