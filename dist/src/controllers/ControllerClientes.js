@@ -199,7 +199,7 @@ class ControllerClientes {
                 yield transaction.startTransaction();
                 let { idUsuario, } = req.body;
                 let querySQL = `UPDATE usuarioLogin SET 
-      estatus=$0
+      estatus=0
       WHERE idUsuario=${idUsuario};`;
                 let respuesta = yield execute.query(querySQL);
                 if (!respuesta.validacion) {

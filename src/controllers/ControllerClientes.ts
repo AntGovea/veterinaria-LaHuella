@@ -221,7 +221,7 @@ export class ControllerClientes {
         idUsuario,
       } = req.body;
       let querySQL = `UPDATE usuarioLogin SET 
-      estatus=$0
+      estatus=0
       WHERE idUsuario=${idUsuario};`;
      let  respuesta:any = await execute.query(querySQL);
       if (!respuesta.validacion) {
