@@ -214,4 +214,37 @@ export class ControllerClientes {
       });
     }
   };
+  deleteCliente = async (req: Request, res: Response) => {
+    try {
+      await transaction.startTransaction();
+      let {
+        idUsuario,
+      } = req.body;
+      let querySQL = `UPDATE usuarioLogin SET 
+      estatus=$0
+      WHERE idUsuario=${idUsuario};`;
+     let  respuesta:any = await execute.query(querySQL);
+      if (!respuesta.validacion) {
+        await transaction.rollBackTransaction();
+        res.send({
+          code: HttpCodes.error,
+          description: respuesta.descripcion,
+        });
+        return;
+      }
+
+      await transaction.commit();
+      res.send({
+        code: HttpCodes.aceptacion,
+        description: descriptions.aceptacion,
+        data: respuesta.data,
+      });
+    } catch (e: any) {
+      res.send({
+        code: HttpCodes.error,
+        description: e.message,
+        data: null,
+      });
+    }
+  };
 }

@@ -194,6 +194,37 @@ class ControllerClientes {
                 });
             }
         });
+        this.deleteCliente = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield transaction.startTransaction();
+                let { idUsuario, } = req.body;
+                let querySQL = `UPDATE usuarioLogin SET 
+      estatus=$0
+      WHERE idUsuario=${idUsuario};`;
+                let respuesta = yield execute.query(querySQL);
+                if (!respuesta.validacion) {
+                    yield transaction.rollBackTransaction();
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                    return;
+                }
+                yield transaction.commit();
+                res.send({
+                    code: Types_1.HttpCodes.aceptacion,
+                    description: Types_1.descriptions.aceptacion,
+                    data: respuesta.data,
+                });
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
     }
 }
 exports.ControllerClientes = ControllerClientes;
