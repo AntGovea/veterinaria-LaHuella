@@ -11,7 +11,7 @@ const router = (0, express_1.Router)();
 router.get("/getAll", controllerUsuario.getUsuarios);
 router.post("/addUser", controllerUsuario.addUser);
 router.post("/getUserById", controllerUsuario.addUser);
-router.get("/getCredencialesCliente", controllerUsuario.getCredencialesCliente);
+router.get("/getCredencialesClientes", controllerUsuario.getCredencialesCliente);
 router.get("/getCredencialesEmpleados", controllerUsuario.getCredencialesEmpleados);
 exports.default = router;
 //# sourceMappingURL=routesUsuarios.js.map

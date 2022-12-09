@@ -8,7 +8,7 @@ const router = Router();
 router.get("/getAll", controllerUsuario.getUsuarios);
 router.post("/addUser", controllerUsuario.addUser);
 router.post("/getUserById", controllerUsuario.addUser);
-router.get("/getCredencialesCliente", controllerUsuario.getCredencialesCliente);
+router.get("/getCredencialesClientes", controllerUsuario.getCredencialesCliente);
 router.get("/getCredencialesEmpleados", controllerUsuario.getCredencialesEmpleados);
 
 export default router;

@@ -41,6 +41,58 @@ class ControllerCategorias {
                 });
             }
         });
+        this.getCategoriasActivas = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let querySQL = `SELECT * FROM catAct;`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
+        this.getCategoriasInactivas = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let querySQL = `SELECT * FROM catIna;`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
         this.addCategoria = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let { categoria, estatus } = req.body;
