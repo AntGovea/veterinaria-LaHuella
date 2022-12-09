@@ -54,7 +54,7 @@ export class ControllerClientes{
               //?usuarioLogin
                 usuario,
                 contrasenia,
-                status,
+                estatus,
                 //?rol
                 idRol,
 
@@ -96,7 +96,7 @@ export class ControllerClientes{
       querySQL=`INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
         '${contrasenia}',
-         ${status}
+         ${estatus}
       );`
        respuesta = await execute.query(querySQL);
        usuarioData=respuesta.data;

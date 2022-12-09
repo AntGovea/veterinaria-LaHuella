@@ -52,7 +52,7 @@ class ControllerClientes {
                 //?persona
                 nombre, apellidoPaterno, apellidoMaterno, calle, colonia, numero, codigo_postal, fechaNacimiento, genero, telefono, 
                 //?usuarioLogin
-                usuario, contrasenia, status, 
+                usuario, contrasenia, estatus, 
                 //?rol
                 idRol, } = req.body;
                 let querySQL = `INSERT INTO persona ( 
@@ -91,7 +91,7 @@ class ControllerClientes {
                 querySQL = `INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
         '${contrasenia}',
-         ${status}
+         ${estatus}
       );`;
                 respuesta = yield execute.query(querySQL);
                 usuarioData = respuesta.data;
