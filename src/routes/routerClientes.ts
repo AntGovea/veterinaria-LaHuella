@@ -10,5 +10,6 @@ router.get("/getAll", controllerClientes.getClientes);
 router.post("/addCliente", controllerClientes.addCliente);
 router.post("/updateCliente", controllerClientes.updateCliente);
 router.post("/deleteCliente", controllerClientes.deleteCliente);
+router.post("/getClientesByStatus", controllerClientes.getClientesByStatus);
 
 export default router;

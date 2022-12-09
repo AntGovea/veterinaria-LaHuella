@@ -183,6 +183,32 @@ class ControllerClientes {
                 });
             }
         });
+        this.getClientesByStatus = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { estatus, } = req.body;
+                let querySQL = `SELECT * FROM getClientes WHERE estatus=${estatus} ;`;
+                let respuesta = yield execute.query(querySQL);
+                if (!respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                    return;
+                }
+                res.send({
+                    code: Types_1.HttpCodes.aceptacion,
+                    description: Types_1.descriptions.aceptacion,
+                    data: respuesta.data,
+                });
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
         this.deleteCliente = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let { idUsuario, } = req.body;
