@@ -87,15 +87,15 @@ class ControllerClientes {
                     });
                     return;
                 }
-                console.log(persona);
-                persona = respuesta.data.insertId;
+                persona = respuesta.data.data.insertId;
+                console.log('persona', persona);
                 querySQL = `INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
         '${contrasenia}',
          ${estatus}
       );`;
                 respuesta = yield execute.query(querySQL);
-                usuarioData = respuesta.data.insertId;
+                usuarioData = respuesta.data.data.insertId;
                 if (!respuesta.validacion) {
                     yield transaction.rollBackTransaction();
                     res.send({
@@ -105,6 +105,7 @@ class ControllerClientes {
                     return;
                 }
                 console.log(usuarioData);
+                console.log('usuarioData', usuarioData);
                 querySQL = `INSERT INTO cliente(idPersona,idRol,idUsuario) VALUES(
          ${persona},
          ${idRol},

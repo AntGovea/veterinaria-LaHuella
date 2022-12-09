@@ -92,24 +92,25 @@ export class ControllerClientes{
         });
         return
       } 
-      console.log(persona)
-      persona=respuesta.data.insertId;
+      persona=respuesta.data.data.insertId;
+      console.log('persona',persona)
       querySQL=`INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
         '${contrasenia}',
          ${estatus}
       );`
        respuesta = await execute.query(querySQL);
-       usuarioData=respuesta.data.insertId;
+       usuarioData=respuesta.data.data.insertId;
        if (!respuesta.validacion) {
-        await transaction.rollBackTransaction();
-        res.send({
-          code: HttpCodes.error,
+         await transaction.rollBackTransaction();
+         res.send({
+           code: HttpCodes.error,
           description: respuesta.descripcion,
         });
         return
       } 
-  console.log(usuarioData)
+      console.log(usuarioData)
+      console.log('usuarioData',usuarioData)
       querySQL=`INSERT INTO cliente(idPersona,idRol,idUsuario) VALUES(
          ${persona},
          ${idRol},
