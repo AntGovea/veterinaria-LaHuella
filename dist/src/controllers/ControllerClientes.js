@@ -88,7 +88,7 @@ class ControllerClientes {
                     return;
                 }
                 persona = respuesta.data.idPersona;
-                querySQL = `INSERT INTO usuarioLogin(usuario,contrasenia,status) VALUES(
+                querySQL = `INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
         '${contrasenia}',
          ${status}
