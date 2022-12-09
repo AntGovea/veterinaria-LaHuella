@@ -87,43 +87,46 @@ class ControllerClientes {
                     });
                     return;
                 }
-                persona = respuesta.data.ResultSetHeader.insertId;
-                ;
                 console.log('persona.data', respuesta.data);
-                querySQL = `INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
-        '${usuario}',
-        '${contrasenia}',
-         ${estatus}
-      );`;
-                respuesta = yield execute.query(querySQL);
-                usuario = respuesta.data.ResultSetHeader.insertId;
-                //  usuarioData=respuesta.data[0].insertId;
-                if (!respuesta.validacion) {
-                    yield transaction.rollBackTransaction();
-                    res.send({
-                        code: Types_1.HttpCodes.error,
-                        description: respuesta.descripcion,
-                    });
-                    return;
-                }
-                console.log(usuarioData);
-                console.log('usuarioData', respuesta.data);
-                // console.log('usuarioData',usuarioData)
-                querySQL = `INSERT INTO cliente(idPersona,idRol,idUsuario) VALUES(
-         ${persona},
-         ${idRol},
-         ${usuarioData}
-      );`;
-                respuesta = yield execute.query(querySQL);
-                if (!respuesta.validacion) {
-                    yield transaction.rollBackTransaction();
-                    res.send({
-                        code: Types_1.HttpCodes.error,
-                        description: respuesta.descripcion,
-                    });
-                    return;
-                }
-                yield transaction.commit();
+                console.log('persona.data.ResultSetHeader', respuesta.data.ResultSetHeader);
+                console.log('persona.data.ResultSetHeader.insertId', respuesta.data.ResultSetHeader.insertId);
+                console.log('persona.data.insertId', respuesta.data.insertId);
+                console.log('persona.data[0].insertId', respuesta.data[0].insertId);
+                // persona=respuesta.data.insertId;
+                // querySQL=`INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
+                //   '${usuario}',
+                //   '${contrasenia}',
+                //    ${estatus}
+                // );`
+                //  respuesta = await execute.query(querySQL);
+                //  usuario=respuesta.data.ResultSetHeader.insertId;
+                // //  usuarioData=respuesta.data[0].insertId;
+                //  if (!respuesta.validacion) {
+                //    await transaction.rollBackTransaction();
+                //    res.send({
+                //      code: HttpCodes.error,
+                //     description: respuesta.descripcion,
+                //   });
+                //   return
+                // } 
+                // console.log(usuarioData)
+                // console.log('usuarioData',respuesta.data)
+                // // console.log('usuarioData',usuarioData)
+                // querySQL=`INSERT INTO cliente(idPersona,idRol,idUsuario) VALUES(
+                //    ${persona},
+                //    ${idRol},
+                //    ${usuarioData}
+                // );`
+                //  respuesta = await execute.query(querySQL);
+                //  if (!respuesta.validacion) {
+                //   await transaction.rollBackTransaction();
+                //   res.send({
+                //     code: HttpCodes.error,
+                //     description: respuesta.descripcion,
+                //   });
+                //   return
+                // } 
+                // await transaction.commit();
                 res.send({
                     code: Types_1.HttpCodes.aceptacion,
                     description: Types_1.descriptions.aceptacion,
