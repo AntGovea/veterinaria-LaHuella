@@ -7,5 +7,6 @@ const router = Router();
 
 //*Roles
 router.get("/getAll", controllerPedidos.getPedidos);
+router.post("/addPedido", controllerPedidos.addPedido);
 
 export default router;

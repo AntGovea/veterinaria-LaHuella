@@ -6,5 +6,6 @@ const controllerPedidos = new ControllerPedido_1.ControllerPedidos();
 const router = (0, express_1.Router)();
 //*Roles
 router.get("/getAll", controllerPedidos.getPedidos);
+router.post("/addPedido", controllerPedidos.addPedido);
 exports.default = router;
 //# sourceMappingURL=routerPedidos.js.map

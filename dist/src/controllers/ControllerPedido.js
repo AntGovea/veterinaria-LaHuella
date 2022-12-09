@@ -41,6 +41,38 @@ class ControllerPedidos {
                 });
             }
         });
+        this.addPedido = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { fechaPedido, observaciones, idCliente, estatus } = req.body;
+                let querySQL = `INSERT INTO pedido (fechaPedido,observaciones,idCliente,estatus) VALUES(
+        '${fechaPedido}',
+        '${observaciones}',
+        ${idCliente},
+        ${estatus}
+      );`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
     }
 }
 exports.ControllerPedidos = ControllerPedidos;
