@@ -88,10 +88,11 @@ class ControllerClientes {
                     return;
                 }
                 console.log('persona.data', respuesta.data);
+                console.log('persona.data[0]', respuesta.data[0]);
+                console.log('persona.data[0].insertId', respuesta.data[0].insertId);
                 console.log('persona.data.ResultSetHeader', respuesta.data.ResultSetHeader);
                 console.log('persona.data.ResultSetHeader.insertId', respuesta.data.ResultSetHeader.insertId);
                 console.log('persona.data.insertId', respuesta.data.insertId);
-                console.log('persona.data[0].insertId', respuesta.data[0].insertId);
                 // persona=respuesta.data.insertId;
                 // querySQL=`INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
                 //   '${usuario}',
