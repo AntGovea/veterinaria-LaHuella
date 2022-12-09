@@ -7,5 +7,7 @@ const router = (0, express_1.Router)();
 //*Roles
 router.get("/getAll", controllerCategorias.getCategorias);
 router.post("/addCategoria", controllerCategorias.addCategoria);
+router.post("/updateCategoria", controllerCategorias.updateCategoria);
+router.post("/deleteCategoria", controllerCategorias.deleteCategoria);
 exports.default = router;
 //# sourceMappingURL=routerCategorias.js.map

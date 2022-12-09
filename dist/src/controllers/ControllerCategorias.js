@@ -43,8 +43,62 @@ class ControllerCategorias {
         });
         this.addCategoria = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let { categoria } = req.body;
-                let querySQL = `INSERT INTO categoria (categoria) VALUES ('${categoria}');`;
+                let { categoria, estatus } = req.body;
+                let querySQL = `INSERT INTO categoria (categoria,estatus) VALUES ('${categoria}',${estatus});`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e,
+                    data: null,
+                });
+            }
+        });
+        this.updateCategoria = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { categoria, estatus, idCategoria } = req.body;
+                let querySQL = `UPDATE categoria SET categoria='${categoria}' ,SET estatus=${estatus} WHERE idCategoria=${idCategoria};`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e,
+                    data: null,
+                });
+            }
+        });
+        this.deleteCategoria = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { idCategoria } = req.body;
+                let querySQL = `UPDATE categoria SET SET estatus=0 WHERE idCategoria=${idCategoria};`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
                     res.send({
