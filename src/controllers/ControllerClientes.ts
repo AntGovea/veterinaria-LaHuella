@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
+import { TRANSACTIONMYSQL } from "../helpers/StartTransaction";
 import { descriptions, HttpCodes } from "../helpers/Types";
 import { Excecute } from "../services/executeServices";
 
 
 let execute = new Excecute();
-
+let transaction=new TRANSACTIONMYSQL();
 export class ControllerClientes{
 
     getClientes = async (req: Request, res: Response) => {
@@ -31,5 +32,116 @@ export class ControllerClientes{
       });
     }
   };
+    addCliente = async (req: Request, res: Response) => {
+
+      let persona:any=[]
+      let usuarioData:any=[]
+        try {
+          await transaction.startTransaction();
+
+          let {
+            //?persona
+               nombre,
+               apellidoPaterno,
+               apellidoMaterno,
+               calle,
+               colonia,
+               numero,
+               codigo_postal,
+               fechaNacimiento,
+               genero,
+               telefono,
+              //?usuarioLogin
+                usuario,
+                contrasenia,
+                status,
+                //?rol
+                idRol,
+
+              }=req.body;
+      let querySQL = `INSERT INTO persona ( 
+        nombre ,
+        apellidoPaterno ,
+        apellidoMaterno,
+        calle,
+        colonia,
+        numero ,
+        codigo_postal,
+        fechaNacimiento,
+        genero,
+        telefono 
+       )
+       VALUES(
+        '${nombre}',
+        '${apellidoPaterno}',
+        '${apellidoMaterno}',
+        '${calle}',
+        '${colonia}',
+        '${numero}',
+         ${codigo_postal},
+        '${fechaNacimiento}',
+         ${genero},
+         '${telefono}');`;
+
+      let respuesta: any = await execute.query(querySQL);
+      if (!respuesta.validacion) {
+        await transaction.rollBackTransaction();
+        res.send({
+          code: HttpCodes.error,
+          description: respuesta.descripcion,
+        });
+        return
+      } 
+      persona=respuesta.data.idPersona;
+      querySQL=`INSERT INTO usuarioLogin(usuario,contrasenia,status) VALUES(
+        '${usuario}',
+        '${contrasenia}',
+         ${status}
+      );`
+       respuesta = await execute.query(querySQL);
+       usuarioData=respuesta.data;
+       if (!respuesta.validacion) {
+        await transaction.rollBackTransaction();
+        res.send({
+          code: HttpCodes.error,
+          description: respuesta.descripcion,
+        });
+        return
+      } 
+
+      querySQL=`INSERT INTO cliente(idPersona,idRol,idUsuario) VALUES(
+         ${persona.insertId},
+         ${idRol},
+         ${usuarioData.insertId}
+      );`
+       respuesta = await execute.query(querySQL);
+
+       if (!respuesta.validacion) {
+        await transaction.rollBackTransaction();
+        res.send({
+          code: HttpCodes.error,
+          description: respuesta.descripcion,
+        });
+        return
+      } 
+      await transaction.commit();
+      res.send({
+        code: HttpCodes.aceptacion,
+        description: descriptions.aceptacion,
+        data: respuesta.data,
+      });
+
+    } catch (e: any) {
+      res.send({
+        code: HttpCodes.error,
+        description: e.message,
+        data: null,
+      });
+    }
+  };
+
+
+
+
 
     }

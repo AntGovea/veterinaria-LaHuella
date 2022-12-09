@@ -6,6 +6,6 @@ const controllerClientes = new ControllerClientes_1.ControllerClientes();
 const router = (0, express_1.Router)();
 //*Roles
 router.get("/getAll", controllerClientes.getClientes);
-// router.post("/addRol", controllerClientes.addRol);
+router.post("/addCliente", controllerClientes.addCliente);
 exports.default = router;
 //# sourceMappingURL=routerClientes.js.map

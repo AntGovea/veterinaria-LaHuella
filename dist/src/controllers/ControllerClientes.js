@@ -10,9 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ControllerClientes = void 0;
+const StartTransaction_1 = require("../helpers/StartTransaction");
 const Types_1 = require("../helpers/Types");
 const executeServices_1 = require("../services/executeServices");
 let execute = new executeServices_1.Excecute();
+let transaction = new StartTransaction_1.TRANSACTIONMYSQL();
 class ControllerClientes {
     constructor() {
         this.getClientes = (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -32,6 +34,95 @@ class ControllerClientes {
                         description: respuesta.descripcion,
                     });
                 }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
+        this.addCliente = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            let persona = [];
+            let usuarioData = [];
+            try {
+                yield transaction.startTransaction();
+                let { 
+                //?persona
+                nombre, apellidoPaterno, apellidoMaterno, calle, colonia, numero, codigo_postal, fechaNacimiento, genero, telefono, 
+                //?usuarioLogin
+                usuario, contrasenia, status, 
+                //?rol
+                idRol, } = req.body;
+                let querySQL = `INSERT INTO persona ( 
+        nombre ,
+        apellidoPaterno ,
+        apellidoMaterno,
+        calle,
+        colonia,
+        numero ,
+        codigo_postal,
+        fechaNacimiento,
+        genero,
+        telefono 
+       )
+       VALUES(
+        '${nombre}',
+        '${apellidoPaterno}',
+        '${apellidoMaterno}',
+        '${calle}',
+        '${colonia}',
+        '${numero}',
+         ${codigo_postal},
+        '${fechaNacimiento}',
+         ${genero},
+         '${telefono}');`;
+                let respuesta = yield execute.query(querySQL);
+                if (!respuesta.validacion) {
+                    yield transaction.rollBackTransaction();
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                    return;
+                }
+                persona = respuesta.data.idPersona;
+                querySQL = `INSERT INTO usuarioLogin(usuario,contrasenia,status) VALUES(
+        '${usuario}',
+        '${contrasenia}',
+         ${status}
+      );`;
+                respuesta = yield execute.query(querySQL);
+                usuarioData = respuesta.data;
+                if (!respuesta.validacion) {
+                    yield transaction.rollBackTransaction();
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                    return;
+                }
+                querySQL = `INSERT INTO cliente(idPersona,idRol,idUsuario) VALUES(
+         ${persona.insertId},
+         ${idRol},
+         ${usuarioData.insertId}
+      );`;
+                respuesta = yield execute.query(querySQL);
+                if (!respuesta.validacion) {
+                    yield transaction.rollBackTransaction();
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                    return;
+                }
+                yield transaction.commit();
+                res.send({
+                    code: Types_1.HttpCodes.aceptacion,
+                    description: Types_1.descriptions.aceptacion,
+                    data: respuesta.data,
+                });
             }
             catch (e) {
                 res.send({
