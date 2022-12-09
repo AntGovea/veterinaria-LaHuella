@@ -75,7 +75,7 @@ class ControllerClientes {
         '${colonia}',
         '${numero}',
          ${codigo_postal},
-        '${fechaNacimiento}',
+         '${fechaNacimiento}',
          ${genero},
          '${telefono}');`;
                 let respuesta = yield execute.query(querySQL);
@@ -87,14 +87,15 @@ class ControllerClientes {
                     });
                     return;
                 }
-                persona = respuesta.data.idPersona;
+                console.log(persona);
+                persona = respuesta.data.insertId;
                 querySQL = `INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
         '${contrasenia}',
          ${estatus}
       );`;
                 respuesta = yield execute.query(querySQL);
-                usuarioData = respuesta.data;
+                usuarioData = respuesta.data.insertId;
                 if (!respuesta.validacion) {
                     yield transaction.rollBackTransaction();
                     res.send({
@@ -103,10 +104,11 @@ class ControllerClientes {
                     });
                     return;
                 }
+                console.log(usuarioData);
                 querySQL = `INSERT INTO cliente(idPersona,idRol,idUsuario) VALUES(
-         ${persona.data.insertId},
+         ${persona},
          ${idRol},
-         ${usuarioData.data.insertId}
+         ${usuarioData}
       );`;
                 respuesta = yield execute.query(querySQL);
                 if (!respuesta.validacion) {
