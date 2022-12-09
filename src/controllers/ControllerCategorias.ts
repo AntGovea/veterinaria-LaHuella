@@ -60,7 +60,7 @@ export class ControllerCategorias {
   updateCategoria = async (req: Request, res: Response) => {
     try {
       let { categoria, estatus, idCategoria } = req.body;
-      let querySQL = `UPDATE categoria SET categoria='${categoria}' ,SET estatus=${estatus} WHERE idCategoria=${idCategoria};`;
+      let querySQL = `UPDATE categoria SET categoria='${categoria}' , estatus=${estatus} WHERE idCategoria=${idCategoria};`;
       let respuesta: any = await execute.query(querySQL);
 
       if (respuesta.validacion) {
@@ -87,7 +87,7 @@ export class ControllerCategorias {
   deleteCategoria = async (req: Request, res: Response) => {
     try {
       let { idCategoria } = req.body;
-      let querySQL = `UPDATE categoria SET SET estatus=0 WHERE idCategoria=${idCategoria};`;
+      let querySQL = `UPDATE categoria  SET estatus=0 WHERE idCategoria=${idCategoria};`;
       let respuesta: any = await execute.query(querySQL);
 
       if (respuesta.validacion) {

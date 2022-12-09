@@ -71,7 +71,7 @@ class ControllerCategorias {
         this.updateCategoria = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let { categoria, estatus, idCategoria } = req.body;
-                let querySQL = `UPDATE categoria SET categoria='${categoria}' ,SET estatus=${estatus} WHERE idCategoria=${idCategoria};`;
+                let querySQL = `UPDATE categoria SET categoria='${categoria}' , estatus=${estatus} WHERE idCategoria=${idCategoria};`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
                     res.send({
@@ -98,7 +98,7 @@ class ControllerCategorias {
         this.deleteCategoria = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let { idCategoria } = req.body;
-                let querySQL = `UPDATE categoria SET SET estatus=0 WHERE idCategoria=${idCategoria};`;
+                let querySQL = `UPDATE categoria  SET estatus=0 WHERE idCategoria=${idCategoria};`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
                     res.send({
