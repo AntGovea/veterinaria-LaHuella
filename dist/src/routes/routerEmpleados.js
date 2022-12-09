@@ -6,5 +6,6 @@ const controllerEmpleado = new ControllerEmpleado_1.ControllerEmpleado();
 const router = (0, express_1.Router)();
 //*Roles
 router.get("/getAll", controllerEmpleado.getEmpleados);
+router.post("/addEmpleado", controllerEmpleado.addEmpleado);
 exports.default = router;
 //# sourceMappingURL=routerEmpleados.js.map
