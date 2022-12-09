@@ -87,7 +87,7 @@ class ControllerClientes {
                     });
                     return;
                 }
-                persona = respuesta;
+                persona = respuesta.data[0].insertId;
                 console.log('persona', persona);
                 querySQL = `INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
@@ -95,7 +95,7 @@ class ControllerClientes {
          ${estatus}
       );`;
                 respuesta = yield execute.query(querySQL);
-                usuarioData = respuesta;
+                usuarioData = respuesta.data[0].insertId;
                 if (!respuesta.validacion) {
                     yield transaction.rollBackTransaction();
                     res.send({

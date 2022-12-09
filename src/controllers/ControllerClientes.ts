@@ -92,7 +92,7 @@ export class ControllerClientes{
         });
         return
       } 
-      persona=respuesta;
+      persona=respuesta.data[0].insertId;
       console.log('persona',persona)
       querySQL=`INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
@@ -100,7 +100,7 @@ export class ControllerClientes{
          ${estatus}
       );`
        respuesta = await execute.query(querySQL);
-       usuarioData=respuesta;
+       usuarioData=respuesta.data[0].insertId;
        if (!respuesta.validacion) {
          await transaction.rollBackTransaction();
          res.send({
