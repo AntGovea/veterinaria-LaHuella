@@ -92,16 +92,16 @@ export class ControllerClientes{
         });
         return
       } 
-      // persona=respuesta.data[0].insertId;
-      persona=respuesta;
-      console.log('persona',persona)
+ 
+      persona=respuesta.data.ResultSetHeader.insertId;;
+      console.log('persona.data',persona.data)
       querySQL=`INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
         '${contrasenia}',
          ${estatus}
       );`
        respuesta = await execute.query(querySQL);
-       usuario=respuesta;
+       usuario=respuesta.data.ResultSetHeader.insertId;
       //  usuarioData=respuesta.data[0].insertId;
        if (!respuesta.validacion) {
          await transaction.rollBackTransaction();
