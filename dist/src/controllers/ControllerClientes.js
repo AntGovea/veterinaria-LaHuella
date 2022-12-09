@@ -104,9 +104,9 @@ class ControllerClientes {
                     return;
                 }
                 querySQL = `INSERT INTO cliente(idPersona,idRol,idUsuario) VALUES(
-         ${persona.insertId},
+         ${persona.data.insertId},
          ${idRol},
-         ${usuarioData.insertId}
+         ${usuarioData.data.insertId}
       );`;
                 respuesta = yield execute.query(querySQL);
                 if (!respuesta.validacion) {
