@@ -7,5 +7,6 @@ const router = (0, express_1.Router)();
 //*Roles
 router.get("/getAll", controllerClientes.getClientes);
 router.post("/addCliente", controllerClientes.addCliente);
+router.post("/updateCliente", controllerClientes.updateCliente);
 exports.default = router;
 //# sourceMappingURL=routerClientes.js.map

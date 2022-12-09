@@ -8,5 +8,6 @@ const router = Router();
 //*Roles
 router.get("/getAll", controllerClientes.getClientes);
 router.post("/addCliente", controllerClientes.addCliente);
+router.post("/updateCliente", controllerClientes.updateCliente);
 
 export default router;
