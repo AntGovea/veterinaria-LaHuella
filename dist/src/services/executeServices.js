@@ -40,7 +40,6 @@ class Excecute {
                                     });
                                 }
                                 else {
-                                    console.log('results', results);
                                     return resolve({
                                         validacion: true,
                                         descripcion: "consulta exitosa",

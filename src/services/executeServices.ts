@@ -41,7 +41,6 @@ export class Excecute {
                     descripcion: error.message,
                   });
                 } else {
-              console.log('results',results)
                   return resolve({
                     validacion: true,
                     descripcion: "consulta exitosa",
