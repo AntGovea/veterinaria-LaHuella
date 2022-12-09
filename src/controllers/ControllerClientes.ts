@@ -94,7 +94,7 @@ export class ControllerClientes{
       } 
  
       persona=respuesta.data.ResultSetHeader.insertId;;
-      console.log('persona.data',persona.data)
+      console.log('persona.data',respuesta.data)
       querySQL=`INSERT INTO usuarioLogin(usuario,contrasenia,estatus) VALUES(
         '${usuario}',
         '${contrasenia}',
@@ -112,7 +112,7 @@ export class ControllerClientes{
         return
       } 
       console.log(usuarioData)
-      console.log('usuarioData',usuarioData)
+      console.log('usuarioData',respuesta.data)
       // console.log('usuarioData',usuarioData)
       querySQL=`INSERT INTO cliente(idPersona,idRol,idUsuario) VALUES(
          ${persona},
