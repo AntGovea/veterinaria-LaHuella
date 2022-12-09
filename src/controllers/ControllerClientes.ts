@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
-import { TRANSACTIONMYSQL } from "../helpers/StartTransaction";
 import { descriptions, HttpCodes } from "../helpers/Types";
 import { Excecute } from "../services/executeServices";
 
 let execute = new Excecute();
-let transaction = new TRANSACTIONMYSQL();
 export class ControllerClientes {
   getClientes = async (req: Request, res: Response) => {
     try {
@@ -34,7 +32,6 @@ export class ControllerClientes {
     let persona: any = 0;
     let usuarioData: any = 0;
     try {
-      await transaction.startTransaction();
 
       let {
         //?persona
@@ -81,7 +78,6 @@ export class ControllerClientes {
 
       let respuesta: any = await execute.query(querySQL);
       if (!respuesta.validacion) {
-        await transaction.rollBackTransaction();
         res.send({
           code: HttpCodes.error,
           description: respuesta.descripcion,
@@ -98,7 +94,6 @@ export class ControllerClientes {
       respuesta = await execute.query(querySQL);
       usuarioData = respuesta.data.insertId;
       if (!respuesta.validacion) {
-        await transaction.rollBackTransaction();
         res.send({
           code: HttpCodes.error,
           description: respuesta.descripcion,
@@ -114,14 +109,12 @@ export class ControllerClientes {
       respuesta = await execute.query(querySQL);
 
       if (!respuesta.validacion) {
-        await transaction.rollBackTransaction();
         res.send({
           code: HttpCodes.error,
           description: respuesta.descripcion,
         });
         return;
       }
-      await transaction.commit();
       res.send({
         code: HttpCodes.aceptacion,
         description: descriptions.aceptacion,
@@ -138,7 +131,6 @@ export class ControllerClientes {
   updateCliente = async (req: Request, res: Response) => {
    
     try {
-      await transaction.startTransaction();
 
       let {
         //?cliente
@@ -177,7 +169,6 @@ export class ControllerClientes {
 
       let respuesta: any = await execute.query(querySQL);
       if (!respuesta.validacion) {
-        await transaction.rollBackTransaction();
         res.send({
           code: HttpCodes.error,
           description: respuesta.descripcion,
@@ -192,7 +183,6 @@ export class ControllerClientes {
       WHERE idUsuario=${idUsuario};`;
       respuesta = await execute.query(querySQL);
       if (!respuesta.validacion) {
-        await transaction.rollBackTransaction();
         res.send({
           code: HttpCodes.error,
           description: respuesta.descripcion,
@@ -200,7 +190,6 @@ export class ControllerClientes {
         return;
       }
 
-      await transaction.commit();
       res.send({
         code: HttpCodes.aceptacion,
         description: descriptions.aceptacion,
@@ -216,7 +205,6 @@ export class ControllerClientes {
   };
   deleteCliente = async (req: Request, res: Response) => {
     try {
-      await transaction.startTransaction();
       let {
         idUsuario,
       } = req.body;
@@ -225,7 +213,6 @@ export class ControllerClientes {
       WHERE idUsuario=${idUsuario};`;
      let  respuesta:any = await execute.query(querySQL);
       if (!respuesta.validacion) {
-        await transaction.rollBackTransaction();
         res.send({
           code: HttpCodes.error,
           description: respuesta.descripcion,
@@ -233,7 +220,6 @@ export class ControllerClientes {
         return;
       }
 
-      await transaction.commit();
       res.send({
         code: HttpCodes.aceptacion,
         description: descriptions.aceptacion,

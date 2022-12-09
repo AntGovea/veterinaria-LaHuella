@@ -10,11 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ControllerEmpleado = void 0;
-const StartTransaction_1 = require("../helpers/StartTransaction");
 const executeServices_1 = require("../services/executeServices");
 const types_1 = require("../types/types");
 let execute = new executeServices_1.Excecute();
-let transaction = new StartTransaction_1.TRANSACTIONMYSQL();
 class ControllerEmpleado {
     constructor() {
         this.getEmpleados = (req, res) => __awaiter(this, void 0, void 0, function* () {
@@ -47,7 +45,6 @@ class ControllerEmpleado {
             let persona = 0;
             let usuarioData = 0;
             try {
-                yield transaction.startTransaction();
                 let { 
                 //?persona
                 nombre, apellidoPaterno, apellidoMaterno, calle, colonia, numero, codigo_postal, fechaNacimiento, genero, telefono, 
@@ -80,7 +77,6 @@ class ControllerEmpleado {
        '${telefono}');`;
                 let respuesta = yield execute.query(querySQL);
                 if (!respuesta.validacion) {
-                    yield transaction.rollBackTransaction();
                     res.send({
                         code: types_1.HttpCodes.error,
                         description: respuesta.descripcion,
@@ -96,7 +92,6 @@ class ControllerEmpleado {
                 respuesta = yield execute.query(querySQL);
                 usuarioData = respuesta.data.insertId;
                 if (!respuesta.validacion) {
-                    yield transaction.rollBackTransaction();
                     res.send({
                         code: types_1.HttpCodes.error,
                         description: respuesta.descripcion,
@@ -110,14 +105,12 @@ class ControllerEmpleado {
     );`;
                 respuesta = yield execute.query(querySQL);
                 if (!respuesta.validacion) {
-                    yield transaction.rollBackTransaction();
                     res.send({
                         code: types_1.HttpCodes.error,
                         description: respuesta.descripcion,
                     });
                     return;
                 }
-                yield transaction.commit();
                 res.send({
                     code: types_1.HttpCodes.aceptacion,
                     description: types_1.descriptions.aceptacion,
@@ -134,7 +127,6 @@ class ControllerEmpleado {
         });
         this.updateEmpleado = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                yield transaction.startTransaction();
                 let { 
                 //?cliente
                 idPersona, idUsuario, 
@@ -158,7 +150,6 @@ class ControllerEmpleado {
       WHERE idPersona=${idPersona};`;
                 let respuesta = yield execute.query(querySQL);
                 if (!respuesta.validacion) {
-                    yield transaction.rollBackTransaction();
                     res.send({
                         code: types_1.HttpCodes.error,
                         description: respuesta.descripcion,
@@ -172,14 +163,12 @@ class ControllerEmpleado {
     WHERE idUsuario=${idUsuario};`;
                 respuesta = yield execute.query(querySQL);
                 if (!respuesta.validacion) {
-                    yield transaction.rollBackTransaction();
                     res.send({
                         code: types_1.HttpCodes.error,
                         description: respuesta.descripcion,
                     });
                     return;
                 }
-                yield transaction.commit();
                 res.send({
                     code: types_1.HttpCodes.aceptacion,
                     description: types_1.descriptions.aceptacion,
@@ -196,21 +185,18 @@ class ControllerEmpleado {
         });
         this.deleteEmpleado = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                yield transaction.startTransaction();
                 let { idUsuario, } = req.body;
                 let querySQL = `UPDATE usuarioLogin SET 
     estatus=0
     WHERE idUsuario=${idUsuario};`;
                 let respuesta = yield execute.query(querySQL);
                 if (!respuesta.validacion) {
-                    yield transaction.rollBackTransaction();
                     res.send({
                         code: types_1.HttpCodes.error,
                         description: respuesta.descripcion,
                     });
                     return;
                 }
-                yield transaction.commit();
                 res.send({
                     code: types_1.HttpCodes.aceptacion,
                     description: types_1.descriptions.aceptacion,

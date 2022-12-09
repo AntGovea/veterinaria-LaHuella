@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
-import { TRANSACTIONMYSQL } from "../helpers/StartTransaction";
 import { Excecute } from "../services/executeServices";
 import { descriptions, HttpCodes } from "../types/types";
 
 let execute = new Excecute();
-let transaction=new TRANSACTIONMYSQL();
 
 export class ControllerEmpleado{
 
@@ -38,7 +36,6 @@ export class ControllerEmpleado{
     let persona:any=0
     let usuarioData:any=0
       try {
-        await transaction.startTransaction();
 
         let {
           //?persona
@@ -86,7 +83,6 @@ export class ControllerEmpleado{
        
        let respuesta: any = await execute.query(querySQL);
        if (!respuesta.validacion) {
-         await transaction.rollBackTransaction();
       res.send({
         code: HttpCodes.error,
         description: respuesta.descripcion,
@@ -103,7 +99,6 @@ export class ControllerEmpleado{
      respuesta = await execute.query(querySQL);
      usuarioData=respuesta.data.insertId;
      if (!respuesta.validacion) {
-       await transaction.rollBackTransaction();
        res.send({
          code: HttpCodes.error,
         description: respuesta.descripcion,
@@ -119,14 +114,12 @@ export class ControllerEmpleado{
      respuesta = await execute.query(querySQL);
 
      if (!respuesta.validacion) {
-      await transaction.rollBackTransaction();
       res.send({
         code: HttpCodes.error,
         description: respuesta.descripcion,
       });
       return
     } 
-    await transaction.commit();
     res.send({
       code: HttpCodes.aceptacion,
       description: descriptions.aceptacion,
@@ -144,7 +137,6 @@ export class ControllerEmpleado{
 updateEmpleado = async (req: Request, res: Response) => {
    
   try {
-    await transaction.startTransaction();
 
     let {
       //?cliente
@@ -183,7 +175,6 @@ updateEmpleado = async (req: Request, res: Response) => {
 
     let respuesta: any = await execute.query(querySQL);
     if (!respuesta.validacion) {
-      await transaction.rollBackTransaction();
       res.send({
         code: HttpCodes.error,
         description: respuesta.descripcion,
@@ -198,7 +189,6 @@ updateEmpleado = async (req: Request, res: Response) => {
     WHERE idUsuario=${idUsuario};`;
     respuesta = await execute.query(querySQL);
     if (!respuesta.validacion) {
-      await transaction.rollBackTransaction();
       res.send({
         code: HttpCodes.error,
         description: respuesta.descripcion,
@@ -206,7 +196,6 @@ updateEmpleado = async (req: Request, res: Response) => {
       return;
     }
 
-    await transaction.commit();
     res.send({
       code: HttpCodes.aceptacion,
       description: descriptions.aceptacion,
@@ -222,7 +211,6 @@ updateEmpleado = async (req: Request, res: Response) => {
 };
 deleteEmpleado = async (req: Request, res: Response) => {
   try {
-    await transaction.startTransaction();
     let {
       idUsuario,
     } = req.body;
@@ -231,7 +219,6 @@ deleteEmpleado = async (req: Request, res: Response) => {
     WHERE idUsuario=${idUsuario};`;
    let  respuesta:any = await execute.query(querySQL);
     if (!respuesta.validacion) {
-      await transaction.rollBackTransaction();
       res.send({
         code: HttpCodes.error,
         description: respuesta.descripcion,
@@ -239,7 +226,6 @@ deleteEmpleado = async (req: Request, res: Response) => {
       return;
     }
 
-    await transaction.commit();
     res.send({
       code: HttpCodes.aceptacion,
       description: descriptions.aceptacion,
