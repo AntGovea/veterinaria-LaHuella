@@ -41,6 +41,98 @@ class ControllerServicios {
                 });
             }
         });
+        this.addServicio = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { servicio, descripcion, precio, idCategoria, estatus } = req.body;
+                let querySQL = `INSERT INTO servicio (servicio,estatus, descripcion, precio, idCategoria) VALUES(
+        '${servicio}',
+        ${estatus},
+        '${descripcion}',
+         ${precio},
+         ${idCategoria}
+      );`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
+        this.updateServicio = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { servicio, descripcion, precio, idCategoria, IdServicio, estatus } = req.body;
+                let querySQL = `UPDATE servicio SET servicio='${servicio}', 
+      descripcion='${descripcion}', 
+      estatus=${estatus},
+      precio=${precio},
+      idCategoria=${idCategoria}
+      WHERE IdServicio=${IdServicio};`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
+        this.deleteServicio = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { estatus, idServicio } = req.body;
+                let querySQL = `UPDATE servicio SET estatus=${estatus} WHERE idServicio=${idServicio};`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
     }
 }
 exports.ControllerServicios = ControllerServicios;
