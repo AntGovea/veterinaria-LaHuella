@@ -41,13 +41,7 @@ export class Excecute {
                     descripcion: error.message,
                   });
                 } else {
-                  console.log("Error al abrir conexion con la bd");
-                  console.log("datos de conexion");
-                  console.log(`host${DB_HOST}`);
-                  console.log(`user${DB_USER}`);
-                  console.log(`port${DB_PORT}`);
-                  console.log(`password${DB_PASSWORD}`);
-                  console.log(`database${DB_NAME}`);
+              console.log('results',results)
                   return resolve({
                     validacion: true,
                     descripcion: "consulta exitosa",
