@@ -9,5 +9,6 @@ router.get("/getAll", controllerServicios.getServicios);
 router.post("/addServicio", controllerServicios.addServicio);
 router.post("/updateServicio", controllerServicios.updateServicio);
 router.post("/deleteServicio", controllerServicios.deleteServicio);
+router.post("/getServiciosByStatus", controllerServicios.getServiciosByStatus);
 exports.default = router;
 //# sourceMappingURL=routerServicios.js.map
