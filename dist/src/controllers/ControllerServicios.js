@@ -136,7 +136,7 @@ class ControllerServicios {
         this.getServiciosByStatus = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let { estatus, } = req.body;
-                let querySQL = `SELECT * FROM servicio WHERE estatus=${estatus} ;`;
+                let querySQL = `SELECT * FROM vistaServicio WHERE estatus=${estatus} ;`;
                 let respuesta = yield execute.query(querySQL);
                 if (!respuesta.validacion) {
                     res.send({

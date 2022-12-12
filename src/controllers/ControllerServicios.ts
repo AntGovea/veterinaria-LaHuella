@@ -120,7 +120,7 @@ export class ControllerServicios {
       let {
         estatus,
       } = req.body;
-      let querySQL = `SELECT * FROM servicio WHERE estatus=${estatus} ;`;
+      let querySQL = `SELECT * FROM vistaServicio WHERE estatus=${estatus} ;`;
   
       let respuesta: any = await execute.query(querySQL);
       if (!respuesta.validacion) {
