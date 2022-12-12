@@ -85,7 +85,7 @@ class ControllerMascota {
                 let querySQL = `UPDATE mascota SET nombre='${nombre}', 
       tipoAnimal='${tipoAnimal}', 
       raza='${raza}',
-      edad=${edad}
+      edad=${edad},
       colorPelo='${colorPelo}',
       peso=${peso},
       sexo=${sexo},
