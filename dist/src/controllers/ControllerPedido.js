@@ -73,6 +73,90 @@ class ControllerPedidos {
                 });
             }
         });
+        this.updatePedido = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { fechaPedido, observaciones, idCliente, idPedido, estatus } = req.body;
+                let querySQL = `UPDATE pedido SET fechaPedido='${fechaPedido}', 
+      observaciones='${observaciones}', 
+      estatus=${estatus},
+      idCliente=${idCliente},
+      WHERE idPedido=${idPedido};`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
+        this.deleteServicio = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { idPedido } = req.body;
+                let querySQL = `UPDATE pedido SET estatus=0 WHERE idPedido=${idPedido};`;
+                let respuesta = yield execute.query(querySQL);
+                if (respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.aceptacion,
+                        description: Types_1.descriptions.aceptacion,
+                        data: respuesta.data,
+                    });
+                }
+                else {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                }
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
+        this.getPedidosByStatus = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { estatus, } = req.body;
+                let querySQL = `SELECT * FROM pedido WHERE estatus=${estatus} ;`;
+                let respuesta = yield execute.query(querySQL);
+                if (!respuesta.validacion) {
+                    res.send({
+                        code: Types_1.HttpCodes.error,
+                        description: respuesta.descripcion,
+                    });
+                    return;
+                }
+                res.send({
+                    code: Types_1.HttpCodes.aceptacion,
+                    description: Types_1.descriptions.aceptacion,
+                    data: respuesta.data,
+                });
+            }
+            catch (e) {
+                res.send({
+                    code: Types_1.HttpCodes.error,
+                    description: e.message,
+                    data: null,
+                });
+            }
+        });
     }
 }
 exports.ControllerPedidos = ControllerPedidos;

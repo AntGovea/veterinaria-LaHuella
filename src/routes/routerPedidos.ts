@@ -8,5 +8,8 @@ const router = Router();
 //*Roles
 router.get("/getAll", controllerPedidos.getPedidos);
 router.post("/addPedido", controllerPedidos.addPedido);
+router.post("/updatePedido", controllerPedidos.updatePedido);
+router.post("/deleteServicio", controllerPedidos.deleteServicio);
+router.post("/getPedidosByStatus", controllerPedidos.getPedidosByStatus);
 
 export default router;

@@ -9,6 +9,7 @@ import empleadosRoutes from "../routes/routerEmpleados";
 
 import categoriasRoutes from "../routes/routerCategorias";
 import pedidosRoutes from "../routes/routerPedidos";
+import detallePedidoRoutes from "../routes/routerDetallesPedidos";
 import serviciosRoutes from "../routes/routerServicios";
 
 import path from "path";
@@ -28,6 +29,7 @@ class Server {
     categorias: "categorias",
     servicios: "servicios",
     pedidos: "pedidos",
+    detallePedido: "detallePedido",
   };
 
   constructor() {
@@ -55,6 +57,7 @@ class Server {
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.categorias}`, categoriasRoutes);
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.servicios}`, serviciosRoutes);
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.pedidos}`, pedidosRoutes);
+    this.app.use(`${process.env.BASEURL}/${this.apiPaths.detallePedido}`, detallePedidoRoutes);
   }
 
   middlewares() {

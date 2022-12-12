@@ -13,6 +13,7 @@ const routerClientes_1 = __importDefault(require("../routes/routerClientes"));
 const routerEmpleados_1 = __importDefault(require("../routes/routerEmpleados"));
 const routerCategorias_1 = __importDefault(require("../routes/routerCategorias"));
 const routerPedidos_1 = __importDefault(require("../routes/routerPedidos"));
+const routerDetallesPedidos_1 = __importDefault(require("../routes/routerDetallesPedidos"));
 const routerServicios_1 = __importDefault(require("../routes/routerServicios"));
 dotenv_1.default.config();
 class Server {
@@ -25,6 +26,7 @@ class Server {
             categorias: "categorias",
             servicios: "servicios",
             pedidos: "pedidos",
+            detallePedido: "detallePedido",
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || "8000";
@@ -43,6 +45,7 @@ class Server {
         this.app.use(`${process.env.BASEURL}/${this.apiPaths.categorias}`, routerCategorias_1.default);
         this.app.use(`${process.env.BASEURL}/${this.apiPaths.servicios}`, routerServicios_1.default);
         this.app.use(`${process.env.BASEURL}/${this.apiPaths.pedidos}`, routerPedidos_1.default);
+        this.app.use(`${process.env.BASEURL}/${this.apiPaths.detallePedido}`, routerDetallesPedidos_1.default);
     }
     middlewares() {
         //cors
