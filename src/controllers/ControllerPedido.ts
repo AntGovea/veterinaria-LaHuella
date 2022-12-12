@@ -9,7 +9,7 @@ export class ControllerPedidos{
 
     getPedidos = async (req: Request, res: Response) => {
         try {
-      let querySQL = `SELECT * FROM pedido;`;
+      let querySQL = `SELECT * FROM viewPedidos;`;
       let respuesta: any = await execute.query(querySQL);
       if (respuesta.validacion) {
         res.send({
@@ -121,7 +121,7 @@ export class ControllerPedidos{
       let {
         estatus,
       } = req.body;
-      let querySQL = `SELECT * FROM pedido WHERE estatus=${estatus} ;`;
+      let querySQL = `SELECT * FROM viewPedidos WHERE estatus=${estatus} ;`;
   
       let respuesta: any = await execute.query(querySQL);
       if (!respuesta.validacion) {

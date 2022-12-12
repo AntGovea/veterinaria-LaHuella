@@ -17,7 +17,7 @@ class ControllerPedidos {
     constructor() {
         this.getPedidos = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let querySQL = `SELECT * FROM pedido;`;
+                let querySQL = `SELECT * FROM viewPedidos;`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
                     res.send({
@@ -134,7 +134,7 @@ class ControllerPedidos {
         this.getPedidosByStatus = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let { estatus, } = req.body;
-                let querySQL = `SELECT * FROM pedido WHERE estatus=${estatus} ;`;
+                let querySQL = `SELECT * FROM viewPedidos WHERE estatus=${estatus} ;`;
                 let respuesta = yield execute.query(querySQL);
                 if (!respuesta.validacion) {
                     res.send({
