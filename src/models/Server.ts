@@ -11,6 +11,7 @@ import categoriasRoutes from "../routes/routerCategorias";
 import pedidosRoutes from "../routes/routerPedidos";
 import detallePedidoRoutes from "../routes/routerDetallesPedidos";
 import serviciosRoutes from "../routes/routerServicios";
+import mascotasRoutes from "../routes/routesMascotas";
 
 import path from "path";
 
@@ -30,6 +31,7 @@ class Server {
     servicios: "servicios",
     pedidos: "pedidos",
     detallePedidos: "detallePedidos",
+    mascotas: "mascotas",
   };
 
   constructor() {
@@ -58,6 +60,9 @@ class Server {
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.servicios}`, serviciosRoutes);
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.pedidos}`, pedidosRoutes);
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.detallePedidos}`, detallePedidoRoutes);
+
+
+    this.app.use(`${process.env.BASEURL}/${this.apiPaths.mascotas}`, mascotasRoutes);
   }
 
   middlewares() {

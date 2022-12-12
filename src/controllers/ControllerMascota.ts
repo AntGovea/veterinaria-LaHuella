@@ -29,6 +29,7 @@ export class ControllerMascota {
       });
     }
   };
+  
   addMascota = async (req: Request, res: Response) => {
     try {
       let {
@@ -76,6 +77,7 @@ export class ControllerMascota {
       });
     }
   };
+
   updateMascota = async (req: Request, res: Response) => {
     try {
       let {
@@ -150,6 +152,7 @@ export class ControllerMascota {
       });
     }
   };
+
   getMascotasByStatus = async (req: Request, res: Response) => {
     try {
       let { estatus } = req.body;
@@ -178,5 +181,5 @@ export class ControllerMascota {
     }
   };
  
-  
+
 }
