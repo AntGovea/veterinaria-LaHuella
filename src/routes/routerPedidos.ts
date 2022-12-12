@@ -9,7 +9,7 @@ const router = Router();
 router.get("/getAll", controllerPedidos.getPedidos);
 router.post("/addPedido", controllerPedidos.addPedido);
 router.post("/updatePedido", controllerPedidos.updatePedido);
-router.post("/deleteServicio", controllerPedidos.deleteServicio);
+router.post("/deletePedido", controllerPedidos.deletePedido);
 router.post("/getPedidosByStatus", controllerPedidos.getPedidosByStatus);
 
 export default router;

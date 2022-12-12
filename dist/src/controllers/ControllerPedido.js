@@ -79,7 +79,7 @@ class ControllerPedidos {
                 let querySQL = `UPDATE pedido SET fechaPedido='${fechaPedido}', 
       observaciones='${observaciones}', 
       estatus=${estatus},
-      idCliente=${idCliente},
+      idCliente=${idCliente}
       WHERE idPedido=${idPedido};`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
@@ -104,7 +104,7 @@ class ControllerPedidos {
                 });
             }
         });
-        this.deleteServicio = (req, res) => __awaiter(this, void 0, void 0, function* () {
+        this.deletePedido = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 let { idPedido } = req.body;
                 let querySQL = `UPDATE pedido SET estatus=0 WHERE idPedido=${idPedido};`;

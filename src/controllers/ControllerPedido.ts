@@ -67,7 +67,7 @@ export class ControllerPedidos{
       let querySQL = `UPDATE pedido SET fechaPedido='${fechaPedido}', 
       observaciones='${observaciones}', 
       estatus=${estatus},
-      idCliente=${idCliente},
+      idCliente=${idCliente}
       WHERE idPedido=${idPedido};`;
       let respuesta: any = await execute.query(querySQL);
       if (respuesta.validacion) {
@@ -91,7 +91,7 @@ export class ControllerPedidos{
     }
   };
 
-  deleteServicio = async (req: Request, res: Response) => {
+  deletePedido = async (req: Request, res: Response) => {
     try {
       let {idPedido} = req.body;
       let querySQL = `UPDATE pedido SET estatus=0 WHERE idPedido=${idPedido};`;
