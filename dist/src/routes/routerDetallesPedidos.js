@@ -6,8 +6,9 @@ const controllerDetallePedido = new ControllerDetallePedido_1.ControllerDetalleP
 const router = (0, express_1.Router)();
 //*Roles
 router.get("/getAll", controllerDetallePedido.getDetallesPedidos);
-router.post("/addPedido", controllerDetallePedido.addDetallePedido);
-// router.post("/updatePedido", controllerDetallePedido.updatePedido);
-// router.post("/deleteServicio", controllerDetallePedido.deleteServicio);
+router.post("/getDetallesPedidosByStatus", controllerDetallePedido.getDetallesPedidosByStatus);
+router.post("/addDetallePedido", controllerDetallePedido.addDetallePedido);
+router.post("/updateDetallePedido", controllerDetallePedido.updateDetallePedido);
+router.post("/deleteDetallePedido", controllerDetallePedido.deleteDetallePedido);
 exports.default = router;
 //# sourceMappingURL=routerDetallesPedidos.js.map

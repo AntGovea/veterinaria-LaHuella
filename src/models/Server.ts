@@ -29,7 +29,7 @@ class Server {
     categorias: "categorias",
     servicios: "servicios",
     pedidos: "pedidos",
-    detallePedido: "detallePedido",
+    detallePedidos: "detallePedidos",
   };
 
   constructor() {
@@ -57,7 +57,7 @@ class Server {
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.categorias}`, categoriasRoutes);
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.servicios}`, serviciosRoutes);
     this.app.use(`${process.env.BASEURL}/${this.apiPaths.pedidos}`, pedidosRoutes);
-    this.app.use(`${process.env.BASEURL}/${this.apiPaths.detallePedido}`, detallePedidoRoutes);
+    this.app.use(`${process.env.BASEURL}/${this.apiPaths.detallePedidos}`, detallePedidoRoutes);
   }
 
   middlewares() {
