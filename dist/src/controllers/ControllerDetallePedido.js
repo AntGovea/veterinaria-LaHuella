@@ -70,15 +70,16 @@ class ControllerDetallePedido {
         });
         this.addDetallePedido = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let { cantidad, precio, subtotal, idPedido, estatus, idServicio, idMascota } = req.body;
-                let querySQL = `INSERT INTO detallePedido(cantidad,precio,subtotal,idPedido,estatus, idServicio,idMascota)VALUES(
+                let { cantidad, precio, subtotal, idPedido, estatus, idServicio, idMascota, total } = req.body;
+                let querySQL = `INSERT INTO detallePedido(cantidad,precio,subtotal,idPedido,estatus, idServicio,idMascota,total)VALUES(
         ${cantidad},
         ${precio},
         ${subtotal},
         ${idPedido},
         ${estatus},
         ${idServicio},
-        ${idMascota}
+        ${idMascota},
+        ${total}
       );`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
@@ -105,13 +106,14 @@ class ControllerDetallePedido {
         });
         this.updateDetallePedido = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let { cantidad, precio, subtotal, idPedido, estatus, idServicio, IdDetallePedido, } = req.body;
+                let { cantidad, precio, subtotal, idPedido, estatus, idServicio, IdDetallePedido, total } = req.body;
                 let querySQL = `UPDATE detallePedido SET
       cantidad=${cantidad},
       precio=${precio},
       subtotal=${subtotal},
       idPedido=${idPedido},
       estatus=${estatus},
+      total=${total},
       idServicio=${idServicio}
         WHERE IdDetallePedido=${IdDetallePedido};`;
                 let respuesta = yield execute.query(querySQL);
