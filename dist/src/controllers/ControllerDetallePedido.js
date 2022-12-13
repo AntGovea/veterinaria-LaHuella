@@ -70,14 +70,15 @@ class ControllerDetallePedido {
         });
         this.addDetallePedido = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let { cantidad, precio, subtotal, idPedido, estatus, idServicio } = req.body;
-                let querySQL = `INSERT INTO detallePedido(cantidad,precio,subtotal,idPedido,estatus, idServicio)VALUES(
+                let { cantidad, precio, subtotal, idPedido, estatus, idServicio, idMascota } = req.body;
+                let querySQL = `INSERT INTO detallePedido(cantidad,precio,subtotal,idPedido,estatus, idServicio,idMascota)VALUES(
         ${cantidad},
         ${precio},
         ${subtotal},
         ${idPedido},
         ${estatus},
-        ${idServicio}
+        ${idServicio},
+        ${idMascota}
       );`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
