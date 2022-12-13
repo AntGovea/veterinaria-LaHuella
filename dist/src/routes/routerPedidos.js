@@ -10,6 +10,6 @@ router.post("/addPedido", controllerPedidos.addPedido);
 router.post("/updatePedido", controllerPedidos.updatePedido);
 router.post("/deletePedido", controllerPedidos.deletePedido);
 router.post("/getPedidosByStatus", controllerPedidos.getPedidosByStatus);
-router.post("/getDetallesPedidosByIdCliente", controllerPedidos.getDetallesPedidosByIdPedido);
+router.post("/getDetallesPedidosByIdPedido", controllerPedidos.getDetallesPedidosByIdPedido);
 exports.default = router;
 //# sourceMappingURL=routerPedidos.js.map
