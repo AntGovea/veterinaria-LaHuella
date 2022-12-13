@@ -28,6 +28,31 @@ export class ControllerClientes {
       });
     }
   };
+  getDetallesPedidosByIdCliente = async (req: Request, res: Response) => {
+    let{idPedido}=req.body
+    try {
+      let querySQL = `SELECT * FROM detallePedido WHERE estatus = 1 AND idPedido = ${idPedido};`;
+      let respuesta: any = await execute.query(querySQL);
+      if (respuesta.validacion) {
+        res.send({
+          code: HttpCodes.aceptacion,
+          description: descriptions.aceptacion,
+          data: respuesta.data,
+        });
+      } else {
+        res.send({
+          code: HttpCodes.error,
+          description: respuesta.descripcion,
+        });
+      }
+    } catch (e: any) {
+      res.send({
+        code: HttpCodes.error,
+        description: e.message,
+        data: null,
+      });
+    }
+  };
   addCliente = async (req: Request, res: Response) => {
     let persona: any = 0;
     let usuarioData: any = 0;

@@ -10,6 +10,7 @@ router.post("/addCliente", controllerClientes.addCliente);
 router.post("/updateCliente", controllerClientes.updateCliente);
 router.post("/deleteCliente", controllerClientes.deleteCliente);
 router.post("/getClientesByStatus", controllerClientes.getClientesByStatus);
+router.post("/getDetallesPedidosByIdCliente", controllerClientes.getDetallesPedidosByIdCliente);
 router.post("/getMascotasCliente", controllerClientes.getMascotasCliente);
 exports.default = router;
 //# sourceMappingURL=routerClientes.js.map
