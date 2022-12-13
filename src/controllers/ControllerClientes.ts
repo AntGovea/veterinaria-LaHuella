@@ -266,7 +266,9 @@ export class ControllerClientes {
   
   getMascotasCliente = async (req: Request, res: Response) => {
     try {
-      let querySQL = `SELECT * FROM getMascotasCliente;`;
+
+      let {idCliente}=req.body;
+      let querySQL = `SELECT * FROM getMascotasCliente WHERE idCliente=${idCliente};`;
       let respuesta: any = await execute.query(querySQL);
       if (respuesta.validacion) {
         res.send({

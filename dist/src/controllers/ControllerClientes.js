@@ -239,7 +239,8 @@ class ControllerClientes {
         });
         this.getMascotasCliente = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let querySQL = `SELECT * FROM getMascotasCliente;`;
+                let { idCliente } = req.body;
+                let querySQL = `SELECT * FROM getMascotasCliente WHERE idCliente=${idCliente};`;
                 let respuesta = yield execute.query(querySQL);
                 if (respuesta.validacion) {
                     res.send({
