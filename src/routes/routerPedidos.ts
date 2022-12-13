@@ -11,5 +11,7 @@ router.post("/addPedido", controllerPedidos.addPedido);
 router.post("/updatePedido", controllerPedidos.updatePedido);
 router.post("/deletePedido", controllerPedidos.deletePedido);
 router.post("/getPedidosByStatus", controllerPedidos.getPedidosByStatus);
+router.post("/getDetallesPedidosByIdCliente", controllerPedidos.getDetallesPedidosByIdPedido);
+
 
 export default router;
