@@ -149,7 +149,8 @@ export class ControllerPedidos{
   getDetallesPedidosByIdPedido = async (req: Request, res: Response) => {
     let{idPedido}=req.body
     try {
-      let querySQL = `SELECT * FROM detallePedido WHERE estatus = 1 AND idPedido = ${idPedido};`;
+      let querySQL = `SELECT dp.*,s.servicio,m.nombre FROM detallePedido dp INNER JOIN servicio s ON dp.idServicio = s.idServicio
+      INNER JOIN mascota m ON dp.idMascota = m.idMascota WHERE dp.estatus = 1 AND dp.idPedido = ${idPedido};`;
       let respuesta: any = await execute.query(querySQL);
       if (respuesta.validacion) {
         res.send({
