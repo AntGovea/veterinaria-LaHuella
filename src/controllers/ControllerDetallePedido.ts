@@ -58,17 +58,16 @@ export class ControllerDetallePedido {
 
   addDetallePedido = async (req: Request, res: Response) => {
     try {
-      let { cantidad, precio, subtotal, idPedido, estatus, idServicio,idMascota,total } =
+      let { cantidad, precio, subtotal, idPedido, estatus, idServicio,idMascota } =
         req.body;
-      let querySQL = `INSERT INTO detallePedido(cantidad,precio,subtotal,idPedido,estatus, idServicio,idMascota,total)VALUES(
+      let querySQL = `INSERT INTO detallePedido(cantidad,precio,subtotal,idPedido,estatus, idServicio,idMascota)VALUES(
         ${cantidad},
         ${precio},
         ${subtotal},
         ${idPedido},
         ${estatus},
         ${idServicio},
-        ${idMascota},
-        ${total}
+        ${idMascota}
       );`;
       let respuesta: any = await execute.query(querySQL);
       if (respuesta.validacion) {
@@ -102,7 +101,6 @@ export class ControllerDetallePedido {
         estatus,
         idServicio,
         IdDetallePedido,
-        total
       } = req.body;
       let querySQL = `UPDATE detallePedido SET
       cantidad=${cantidad},
@@ -110,7 +108,6 @@ export class ControllerDetallePedido {
       subtotal=${subtotal},
       idPedido=${idPedido},
       estatus=${estatus},
-      total=${total},
       idServicio=${idServicio}
         WHERE IdDetallePedido=${IdDetallePedido};`;
 
